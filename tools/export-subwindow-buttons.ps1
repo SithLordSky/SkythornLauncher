@@ -77,3 +77,6 @@ foreach ($item in $map) {
 }
 
 Write-Host "Done."
+
+# Backgrounds: copy from OneDrive flat exports (Profiles Menu.png / Settings Menu.png).
+# Do not use the PXZ Background layer unless those PNGs are updated too.
