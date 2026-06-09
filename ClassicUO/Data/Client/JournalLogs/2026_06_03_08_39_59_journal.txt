@@ -1,0 +1,8 @@
+[06/03/2026 08:39:59]  System: Welcome, Warrior! There is currently 1 user online, with 95687 items and 1512 mobiles in the world.
+[06/03/2026 08:39:59]  System: Welcome back to Britannia, Adventurer!
+[06/03/2026 08:40:00]  Warrior: Warrior
+[06/03/2026 08:40:00]  Donata: Donata the innkeeper
+[06/03/2026 08:40:03]  System: Welcome to this shard.
+[06/03/2026 08:40:13]  System: Please enjoy your stay.
+[06/03/2026 08:40:17]  a cat: a cat
+[06/03/2026 08:40:18]  a dog: a dog

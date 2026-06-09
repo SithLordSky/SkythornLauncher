@@ -1,0 +1,260 @@
+[09/16/2025 18:16:35]  System: WorldMap loading...
+[09/16/2025 18:16:35]  System: Loading WorldMap markers..
+[09/16/2025 18:16:35]  System: WorldMap markers loaded (0)
+[09/16/2025 18:16:35]  System: Welcome, Scarlett! There is currently 1 user online, with 95658 items and 1471 mobiles in the world.
+[09/16/2025 18:16:35]  System: Welcome back to Britannia, Adventurer!
+[09/16/2025 18:16:35]  Scarlett: Scarlett
+[09/16/2025 18:16:36]  System: WorldMap loaded!
+[09/16/2025 18:16:44]  System: You are now under the protection of the town guards.
+[09/16/2025 18:16:46]  a dog: a dog
+[09/16/2025 18:16:47]  a cat: a cat
+[09/16/2025 18:16:47]  Mandek: Mandek the real estate broker
+[09/16/2025 18:16:47]  Yvonne: Yvonne the architect
+[09/16/2025 18:16:47]  Helen: Helen the carpenter
+[09/16/2025 18:16:49]  a cuckoo: a cuckoo
+[09/16/2025 18:16:56]  Yvonne: Yvonne the architect
+[09/16/2025 18:16:58]  Helen: Helen the carpenter
+[09/16/2025 18:17:02]  a cat: a cat
+[09/16/2025 18:17:03]  Helen: Helen the carpenter
+[09/16/2025 18:17:03]  a thrush: a thrush
+[09/16/2025 18:17:06]  a towhee: a towhee
+[09/16/2025 18:17:08]  Deianira: Deianira
+[09/16/2025 18:17:08]  a rat: a rat
+[09/16/2025 18:17:10]  a rat: a rat
+[09/16/2025 18:17:10]  a nightingale: a nightingale
+[09/16/2025 18:17:11]  a cat: a cat
+[09/16/2025 18:17:11]  a cat: a cat
+[09/16/2025 18:17:36]  a towhee: a towhee
+[09/16/2025 18:19:46]  a cat: a cat
+[09/16/2025 18:19:48]  a cat: a cat
+[09/16/2025 18:20:11]  a rat: a rat
+[09/16/2025 18:20:28]  System: The world will save in 30 seconds.
+[09/16/2025 18:20:57]  a cat: a cat
+[09/16/2025 18:20:57]  a cat: a cat
+[09/16/2025 18:20:58]  Jack: Jack
+[09/16/2025 18:20:58]  a nightingale: a nightingale
+[09/16/2025 18:20:58]  a towhee: a towhee
+[09/16/2025 18:20:58]  a rat: a rat
+[09/16/2025 18:20:58]  Deianira: Deianira
+[09/16/2025 18:20:58]  Lensar: Lensar the tavern keeper
+[09/16/2025 18:20:59]  Damien: Damien the barkeeper
+[09/16/2025 18:20:59]  Ashby: Ashby the cook
+[09/16/2025 18:20:59]  System: The world is saving, please wait.
+[09/16/2025 18:20:59]  System: World save complete. The entire process took 0.1 seconds.
+[09/16/2025 18:20:59]  System: World save completed in 0.1 seconds.
+[09/16/2025 18:21:00]  a dog: a dog
+[09/16/2025 18:21:01]  Valeria: Valeria the cobbler
+[09/16/2025 18:21:01]  Chilali: Chilali the provisioner
+[09/16/2025 18:21:02]  a cat: a cat
+[09/16/2025 18:21:03]  Seward: Seward the butcher
+[09/16/2025 18:21:03]  a crow: a crow
+[09/16/2025 18:21:05]  System: Opening door...
+[09/16/2025 18:21:05]  a dog: a dog
+[09/16/2025 18:21:06]  a dog: a dog
+[09/16/2025 18:21:07]  a dog: a dog
+[09/16/2025 18:21:07]  a dog: a dog
+[09/16/2025 18:21:08]  a dog: a dog
+[09/16/2025 18:21:08]  Zella: Zella the tailor
+[09/16/2025 18:21:09]  a rat: a rat
+[09/16/2025 18:21:10]  a dog: a dog
+[09/16/2025 18:21:10]  Diederik: Diederik
+[09/16/2025 18:21:12]  System: Opening door...
+[09/16/2025 18:21:20]  a dog: a dog
+[09/16/2025 18:21:22]  Valeria: Valeria the cobbler
+[09/16/2025 18:21:26]  a dog: a dog
+[09/16/2025 18:21:27]  Scarlett: Vendor sell
+[09/16/2025 18:21:31]  System: The bulk order deed has been placed in your backpack.
+[09/16/2025 18:21:32]  Valeria: Valeria the cobbler
+[09/16/2025 18:21:32]  Chilali: Chilali the provisioner
+[09/16/2025 18:21:35]  You see: (blessed)
+[09/16/2025 18:21:35]  You see: a bulk order deed
+[09/16/2025 18:21:38]  a cat: a cat
+[09/16/2025 18:21:41]  System: Opening door...
+[09/16/2025 18:21:42]  Diederik: Diederik
+[09/16/2025 18:21:43]  Connor: Connor the tinker
+[09/16/2025 18:21:43]  a rat: a rat
+[09/16/2025 18:21:43]  a cat: a cat
+[09/16/2025 18:21:44]  a rat: a rat
+[09/16/2025 18:21:45]  a cat: a cat
+[09/16/2025 18:21:46]  a dog: a dog
+[09/16/2025 18:21:46]  a towhee: a towhee
+[09/16/2025 18:21:47]  a magpie: a magpie
+[09/16/2025 18:21:47]  Jack: Jack
+[09/16/2025 18:21:47]  a thrush: a thrush
+[09/16/2025 18:21:48]  Deianira: Deianira
+[09/16/2025 18:21:49]  a cat: a cat
+[09/16/2025 18:21:51]  a dog: a dog
+[09/16/2025 18:21:51]  a magpie: a magpie
+[09/16/2025 18:21:53]  Yvonne: Yvonne the architect
+[09/16/2025 18:21:53]  Mandek: Mandek the real estate broker
+[09/16/2025 18:21:53]  a cat: a cat
+[09/16/2025 18:21:53]  Helen: Helen the carpenter
+[09/16/2025 18:21:54]  a cuckoo: a cuckoo
+[09/16/2025 18:21:58]  a cat: a cat
+[09/16/2025 18:22:03]  a dog: a dog
+[09/16/2025 18:22:03]  Aliz: Aliz the furtrader
+[09/16/2025 18:22:04]  Vokes: Vokes the tanner
+[09/16/2025 18:22:05]  Narda: Narda the provisioner
+[09/16/2025 18:22:05]  Hale: Hale the cobbler
+[09/16/2025 18:22:06]  Trina: Trina the banker
+[09/16/2025 18:22:06]  Natalie: Natalie the minter
+[09/16/2025 18:22:06]  a rat: a rat
+[09/16/2025 18:22:07]  Aolani: Aolani the town crier
+[09/16/2025 18:22:07]  a rat: a rat
+[09/16/2025 18:22:08]  Natalie: Natalie the minter
+[09/16/2025 18:22:09]  a rat: a rat
+[09/16/2025 18:22:09]  a rat: a rat
+[09/16/2025 18:22:10]  Stevan: Stevan the weaponsmith
+[09/16/2025 18:22:10]  Yenene: Yenene the armorer
+[09/16/2025 18:22:10]  a cat: a cat
+[09/16/2025 18:22:13]  Narda: Narda the provisioner
+[09/16/2025 18:22:13]  Hale: Hale the cobbler
+[09/16/2025 18:22:17]  Vokes: Vokes the tanner
+[09/16/2025 18:22:19]  Aliz: Aliz the furtrader
+[09/16/2025 18:22:20]  a rat: a rat
+[09/16/2025 18:22:32]  a rat: a rat
+[09/16/2025 18:22:34]  You see: The Stretched Hide
+[09/16/2025 18:22:35]  a dog: a dog
+[09/16/2025 18:22:42]  You see: Mount Kendall
+[09/16/2025 18:22:43]  a cat: a cat
+[09/16/2025 18:22:43]  Mandek: Mandek the real estate broker
+[09/16/2025 18:22:43]  Helen: Helen the carpenter
+[09/16/2025 18:22:44]  Yvonne: Yvonne the architect
+[09/16/2025 18:22:50]  a cat: a cat
+[09/16/2025 18:22:51]  a thrush: a thrush
+[09/16/2025 18:22:52]  a magpie: a magpie
+[09/16/2025 18:22:52]  a cat: a cat
+[09/16/2025 18:22:52]  a dog: a dog
+[09/16/2025 18:22:52]  Deianira: Deianira
+[09/16/2025 18:22:54]  You see: The Golden Pick Axe
+[09/16/2025 18:22:55]  a towhee: a towhee
+[09/16/2025 18:22:55]  a rat: a rat
+[09/16/2025 18:22:56]  Jack: Jack
+[09/16/2025 18:22:56]  a rat: a rat
+[09/16/2025 18:22:56]  a rat: a rat
+[09/16/2025 18:22:57]  a magpie: a magpie
+[09/16/2025 18:22:57]  a rat: a rat
+[09/16/2025 18:22:58]  Diederik: Diederik
+[09/16/2025 18:23:00]  Connor: Connor the tinker
+[09/16/2025 18:23:01]  You see: The New World Order
+[09/16/2025 18:23:02]  a dog: a dog
+[09/16/2025 18:23:02]  a rat: a rat
+[09/16/2025 18:23:03]  Valeria: Valeria the cobbler
+[09/16/2025 18:23:03]  a cat: a cat
+[09/16/2025 18:23:03]  Chilali: Chilali the provisioner
+[09/16/2025 18:23:04]  a rat: a rat
+[09/16/2025 18:23:05]  a towhee: a towhee
+[09/16/2025 18:23:05]  Aspasia: Aspasia the waiter
+[09/16/2025 18:23:05]  Lensar: Lensar the tavern keeper
+[09/16/2025 18:23:05]  Damien: Damien the barkeeper
+[09/16/2025 18:23:05]  Ashby: Ashby the cook
+[09/16/2025 18:23:05]  Lensar: Lensar the tavern keeper
+[09/16/2025 18:23:05]  Damien: Damien the barkeeper
+[09/16/2025 18:23:07]  a dog: a dog
+[09/16/2025 18:23:07]  a cat: a cat
+[09/16/2025 18:23:07]  a nightingale: a nightingale
+[09/16/2025 18:23:07]  a dog: a dog
+[09/16/2025 18:23:09]  You see: The Barnacle
+[09/16/2025 18:23:12]  Scarlett: [move
+[09/16/2025 18:23:15]  Scarlett: [move
+[09/16/2025 18:23:21]  a dog: a dog
+[09/16/2025 18:23:24]  Scarlett: [move
+[09/16/2025 18:23:28]  System: Opening door...
+[09/16/2025 18:23:29]  a dog: a dog
+[09/16/2025 18:23:32]  a dog: a dog
+[09/16/2025 18:23:53]  Skythorn: Skythorn
+[09/16/2025 18:24:15]  Jack: Jack
+[09/16/2025 18:24:15]  a towhee: a towhee
+[09/16/2025 18:24:15]  a cat: a cat
+[09/16/2025 18:24:16]  a dog: a dog
+[09/16/2025 18:24:16]  a rat: a rat
+[09/16/2025 18:24:16]  a rat: a rat
+[09/16/2025 18:24:17]  Ashby: Ashby the cook
+[09/16/2025 18:24:17]  Damien: Damien the barkeeper
+[09/16/2025 18:24:17]  Deianira: Deianira
+[09/16/2025 18:24:17]  Aspasia: Aspasia the waiter
+[09/16/2025 18:24:21]  wooden signpost
+[09/16/2025 18:24:22]  Jack: Jack
+[09/16/2025 18:24:22]  Skythorn: Skythorn
+[09/16/2025 18:24:23]  a thrush: a thrush
+[09/16/2025 18:24:23]  a cat: a cat
+[09/16/2025 18:24:23]  a cat: a cat
+[09/16/2025 18:24:24]  a dog: a dog
+[09/16/2025 18:24:25]  a magpie: a magpie
+[09/16/2025 18:24:32]  Helen: Helen the carpenter
+[09/16/2025 18:24:32]  Mandek: Mandek the real estate broker
+[09/16/2025 18:24:32]  Yvonne: Yvonne the architect
+[09/16/2025 18:24:33]  a cat: a cat
+[09/16/2025 18:24:34]  a rat: a rat
+[09/16/2025 18:24:34]  a crow: a crow
+[09/16/2025 18:24:35]  a cat: a cat
+[09/16/2025 18:24:36]  a magpie: a magpie
+[09/16/2025 18:24:36]  System: Opening door...
+[09/16/2025 18:24:37]  a dog: a dog
+[09/16/2025 18:24:38]  a rat: a rat
+[09/16/2025 18:24:38]  a cat: a cat
+[09/16/2025 18:24:39]  a cat: a cat
+[09/16/2025 18:24:39]  Yvonne: Yvonne the architect
+[09/16/2025 18:24:39]  a crow: a crow
+[09/16/2025 18:24:39]  a magpie: a magpie
+[09/16/2025 18:24:39]  Mandek: Mandek the real estate broker
+[09/16/2025 18:24:40]  a dog: a dog
+[09/16/2025 18:24:43]  Mandek: Mandek the real estate broker
+[09/16/2025 18:24:43]  Helen: Helen the carpenter
+[09/16/2025 18:24:45]  a rat: a rat
+[09/16/2025 18:24:45]  a cat: a cat
+[09/16/2025 18:24:45]  a crow: a crow
+[09/16/2025 18:24:46]  a cat: a cat
+[09/16/2025 18:24:46]  a cat: a cat
+[09/16/2025 18:24:46]  a cat: a cat
+[09/16/2025 18:24:47]  a rat: a rat
+[09/16/2025 18:24:48]  a rat: a rat
+[09/16/2025 18:24:49]  Helen: Helen the carpenter
+[09/16/2025 18:24:49]  Mandek: Mandek the real estate broker
+[09/16/2025 18:24:49]  Yvonne: Yvonne the architect
+[09/16/2025 18:24:53]  a cat: a cat
+[09/16/2025 18:24:54]  Aliz: Aliz the furtrader
+[09/16/2025 18:24:54]  Vokes: Vokes the tanner
+[09/16/2025 18:24:56]  a rat: a rat
+[09/16/2025 18:24:57]  a rat: a rat
+[09/16/2025 18:25:00]  Hale: Hale the cobbler
+[09/16/2025 18:25:00]  Narda: Narda the provisioner
+[09/16/2025 18:25:00]  Trina: Trina the banker
+[09/16/2025 18:25:01]  Natalie: Natalie the minter
+[09/16/2025 18:25:01]  Aolani: Aolani the town crier
+[09/16/2025 18:25:03]  Stevan: Stevan the weaponsmith
+[09/16/2025 18:25:04]  a wren: a wren
+[09/16/2025 18:25:06]  System: Opening door...
+[09/16/2025 18:25:09]  a wren: a wren
+[09/16/2025 18:25:09]  a rat: a rat
+[09/16/2025 18:25:21]  Hale: Hale the cobbler
+[09/16/2025 18:25:21]  Narda: Narda the provisioner
+[09/16/2025 18:25:22]  Stevan: Stevan the weaponsmith
+[09/16/2025 18:25:22]  Yenene: Yenene the armorer
+[09/16/2025 18:25:22]  a cat: a cat
+[09/16/2025 18:25:27]  Vokes: Vokes the tanner
+[09/16/2025 18:25:27]  Aliz: Aliz the furtrader
+[09/16/2025 18:25:28]  a rat: a rat
+[09/16/2025 18:25:29]  a cat: a cat
+[09/16/2025 18:25:29]  a cat: a cat
+[09/16/2025 18:25:35]  System: You have left the protection of the town guards.
+[09/16/2025 18:25:38]  System: The world will save in 30 seconds.
+[09/16/2025 18:25:40]  System: You are now under the protection of the town guards.
+[09/16/2025 18:25:42]  Aliz: Aliz the furtrader
+[09/16/2025 18:25:42]  a cat: a cat
+[09/16/2025 18:25:43]  a cat: a cat
+[09/16/2025 18:25:43]  a rat: a rat
+[09/16/2025 18:25:43]  Helen: Helen the carpenter
+[09/16/2025 18:25:43]  Mandek: Mandek the real estate broker
+[09/16/2025 18:25:43]  Yvonne: Yvonne the architect
+[09/16/2025 18:25:51]  Deianira: Deianira
+[09/16/2025 18:25:51]  a cat: a cat
+[09/16/2025 18:25:51]  a cat: a cat
+[09/16/2025 18:25:52]  a towhee: a towhee
+[09/16/2025 18:25:52]  a rat: a rat
+[09/16/2025 18:25:55]  a rat: a rat
+[09/16/2025 18:25:57]  a rat: a rat
+[09/16/2025 18:25:58]  Alula: Alula the animal trainer
+[09/16/2025 18:26:08]  System: The world is saving, please wait.
+[09/16/2025 18:26:08]  System: World save complete. The entire process took 0.1 seconds.
+[09/16/2025 18:26:08]  System: World save completed in 0.1 seconds.

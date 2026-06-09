@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>SkythornLauncher</AssemblyName>
+    <RootNamespace>SkythornLauncher</RootNamespace>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+    <DefaultItemExcludes>$(DefaultItemExcludes);ShardStatusServer\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System.IO" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\app.ico" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\home-background.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\profiles-background.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\settings-background.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\pointer.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\STRIcon.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Fonts\Harrington.ttf" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Icons\status-green.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Icons\status-red.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Icons\status-yellow.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\menu-buttons-border.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\play.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\play-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\profile.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\profile-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\settings.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\settings-hover.png" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

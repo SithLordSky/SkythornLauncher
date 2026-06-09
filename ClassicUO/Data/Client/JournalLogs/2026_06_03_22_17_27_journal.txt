@@ -1,0 +1,166 @@
+[06/03/2026 22:17:27]  System: WorldMap loading...
+[06/03/2026 22:17:27]  System: Loading WorldMap markers..
+[06/03/2026 22:17:27]  System: WorldMap markers loaded (0)
+[06/03/2026 22:17:27]  System: Welcome, Skythorn! There is currently 1 user online, with 95641 items and 1411 mobiles in the world.
+[06/03/2026 22:17:27]  System: Hail, Lord Skythorn himself!
+Thou art the master of this realm, the weaver of worlds, the keeper of the sacred code. All bow before thy might, and all tremble at thy command. May thy reign be long and thy server stable. Thou art the one true owner of Lord Skythorn's Revenge!
+
+Now go forth and fix those bugs, lest the peasants revolt and demand refunds for their monthly subscription of zero gold pieces!
+[06/03/2026 22:17:27]  System: WorldMap loaded!
+[06/03/2026 22:17:27]  Skythorn: Skythorn
+[06/03/2026 22:22:18]  System: The world will save in 30 seconds.
+[06/03/2026 22:22:49]  System: The world is saving, please wait.
+[06/03/2026 22:22:49]  System: World save complete. The entire process took 0.2 seconds.
+[06/03/2026 22:22:49]  System: World save completed in 0.2 seconds.
+[06/03/2026 22:26:02]  You see: This house is ageless.
+[06/03/2026 22:26:02]  You see: brass sign
+[06/03/2026 22:27:24]  System: The world will save in 30 seconds.
+[06/03/2026 22:27:54]  System: The world is saving, please wait.
+[06/03/2026 22:27:54]  System: World save complete. The entire process took 0.2 seconds.
+[06/03/2026 22:27:54]  System: World save completed in 0.2 seconds.
+[06/03/2026 22:32:29]  System: The world will save in 30 seconds.
+[06/03/2026 22:33:00]  System: The world is saving, please wait.
+[06/03/2026 22:33:00]  System: World save complete. The entire process took 0.1 seconds.
+[06/03/2026 22:33:00]  System: World save completed in 0.1 seconds.
+[06/03/2026 22:37:34]  System: The world will save in 30 seconds.
+[06/03/2026 22:38:05]  System: The world is saving, please wait.
+[06/03/2026 22:38:05]  System: World save complete. The entire process took 0.1 seconds.
+[06/03/2026 22:38:05]  System: World save completed in 0.1 seconds.
+[06/03/2026 22:40:26]  System: You are now under the protection of the town guards.
+[06/03/2026 22:40:26]  Donata: Donata the innkeeper
+[06/03/2026 22:40:31]  a rat: a rat
+[06/03/2026 22:40:38]  a chickadee: a chickadee
+[06/03/2026 22:40:38]  a dog: a dog
+[06/03/2026 22:40:41]  a dog: a dog
+[06/03/2026 22:40:41]  Babette: Babette the alchemist
+[06/03/2026 22:40:41]  a rat: a rat
+[06/03/2026 22:40:41]  Kama: Kama
+[06/03/2026 22:40:41]  Billie: Billie the herbalist
+[06/03/2026 22:40:43]  Clement: Clement the provisioner
+[06/03/2026 22:40:43]  Stephan: Stephan the cobbler
+[06/03/2026 22:40:44]  a magpie: a magpie
+[06/03/2026 22:40:44]  a rat: a rat
+[06/03/2026 22:40:45]  a dog: a dog
+[06/03/2026 22:40:45]  Josephine: Josephine the jeweler
+[06/03/2026 22:40:46]  Justine: Justine the armorer
+[06/03/2026 22:40:46]  Evangeline: Evangeline the weaponsmith
+[06/03/2026 22:40:46]  Daya: Daya the weaver
+[06/03/2026 22:40:47]  Pearce: Pearce
+[06/03/2026 22:40:47]  Fayme: Fayme the tailor
+[06/03/2026 22:40:48]  a dog: a dog
+[06/03/2026 22:40:52]  Guthrie: Guthrie the barkeeper
+[06/03/2026 22:40:52]  Josephine: Josephine the jeweler
+[06/03/2026 22:40:52]  Zared: Zared the banker
+[06/03/2026 22:40:52]  Maddy: Maddy the minter
+[06/03/2026 22:40:54]  Skythorn: Bank
+[06/03/2026 22:40:56]  Guthrie: Guthrie the barkeeper
+[06/03/2026 22:40:56]  Stasio: Stasio the town crier
+[06/03/2026 22:40:59]  Skythorn: Bank
+[06/03/2026 22:40:59]  Skythorn: Bank container has 4 items, 5 stones
+[06/03/2026 22:41:02]  Guthrie: Guthrie the barkeeper
+[06/03/2026 22:41:03]  Douglas: Douglas the cook
+[06/03/2026 22:41:03]  Brentan: Brentan the tavern keeper
+[06/03/2026 22:41:03]  Mara: Mara the waiter
+[06/03/2026 22:41:06]  You see: the Moat
+[06/03/2026 22:41:11]  Melody: Melody
+[06/03/2026 22:41:14]  Absinthe: Absinthe the guard
+[06/03/2026 22:41:14]  Barth: Barth the guard
+[06/03/2026 22:41:16]  Wyatt: Wyatt the tanner
+[06/03/2026 22:41:16]  Wyatt: Wyatt the tanner
+[06/03/2026 22:41:18]  Melody: Melody
+[06/03/2026 22:41:20]  You see: Poor Gate
+[06/03/2026 22:41:21]  Wyatt: Wyatt the tanner
+[06/03/2026 22:41:21]  Audric: Audric the furtrader
+[06/03/2026 22:41:23]  Karol: Karol the architect
+[06/03/2026 22:41:23]  Adley: Adley the real estate broker
+[06/03/2026 22:41:23]  Merrik: Merrik
+[06/03/2026 22:41:23]  Agustin: Agustin the carpenter
+[06/03/2026 22:41:25]  Geraldine: Geraldine the scribe
+[06/03/2026 22:41:25]  a cat: a cat
+[06/03/2026 22:41:26]  Aiella: Aiella the baker
+[06/03/2026 22:41:26]  Kerby: Kerby
+[06/03/2026 22:41:28]  Merrik: Merrik
+[06/03/2026 22:41:29]  System: Opening door...
+[06/03/2026 22:41:31]  Karol: Karol the architect
+[06/03/2026 22:41:32]  Midori: Midori
+[06/03/2026 22:41:33]  Aiella: Aiella the baker
+[06/03/2026 22:41:33]  Kerby: Kerby
+[06/03/2026 22:41:34]  a rat: a rat
+[06/03/2026 22:41:35]  Ramsey: Ramsey
+[06/03/2026 22:41:35]  Bialy: Bialy
+[06/03/2026 22:41:35]  Karlenne: Karlenne the healer
+[06/03/2026 22:41:36]  a cat: a cat
+[06/03/2026 22:41:36]  Merill: Merill the armorer
+[06/03/2026 22:41:37]  a cat: a cat
+[06/03/2026 22:41:37]  Donata: Donata the innkeeper
+[06/03/2026 22:41:38]  a raven: a raven
+[06/03/2026 22:41:39]  Balia: Balia the bowyer
+[06/03/2026 22:42:43]  System: The world will save in 30 seconds.
+[06/03/2026 22:43:13]  System: The world is saving, please wait.
+[06/03/2026 22:43:13]  System: World save complete. The entire process took 0.1 seconds.
+[06/03/2026 22:43:13]  System: World save completed in 0.1 seconds.
+[06/03/2026 22:44:55]  a cat: a cat
+[06/03/2026 22:44:58]  a cat: a cat
+[06/03/2026 22:45:16]  Bialy: Bialy
+[06/03/2026 22:45:34]  a rat: a rat
+[06/03/2026 22:45:38]  a rat: a rat
+[06/03/2026 22:47:45]  Bialy: Bialy
+[06/03/2026 22:47:48]  System: The world will save in 30 seconds.
+[06/03/2026 22:48:12]  a cat: a cat
+[06/03/2026 22:48:18]  System: The world is saving, please wait.
+[06/03/2026 22:48:18]  System: World save complete. The entire process took 0.1 seconds.
+[06/03/2026 22:48:18]  System: World save completed in 0.1 seconds.
+[06/03/2026 22:48:45]  a cat: a cat
+[06/03/2026 22:48:53]  Bialy: Bialy
+[06/03/2026 22:49:07]  a cat: a cat
+[06/03/2026 22:49:07]  Bialy: Bialy
+[06/03/2026 22:50:17]  Bialy: Bialy
+[06/03/2026 22:50:48]  Bialy: Bialy
+[06/03/2026 22:50:59]  a cat: a cat
+[06/03/2026 22:51:12]  a cat: a cat
+[06/03/2026 22:51:41]  Bialy: Bialy
+[06/03/2026 22:51:53]  a cat: a cat
+[06/03/2026 22:52:28]  Bialy: Bialy
+[06/03/2026 22:52:51]  System: The world will save in 30 seconds.
+[06/03/2026 22:52:56]  a cat: a cat
+[06/03/2026 22:53:09]  a cat: a cat
+[06/03/2026 22:53:21]  System: The world is saving, please wait.
+[06/03/2026 22:53:21]  System: World save complete. The entire process took 0.1 seconds.
+[06/03/2026 22:53:21]  System: World save completed in 0.1 seconds.
+[06/03/2026 22:53:56]  Bialy: Bialy
+[06/03/2026 22:54:03]  wooden shingles
+[06/03/2026 22:55:15]  a raven: a raven
+[06/03/2026 22:56:35]  a cat: a cat
+[06/03/2026 22:57:59]  System: The world will save in 30 seconds.
+[06/03/2026 22:58:24]  Bialy: Bialy
+[06/03/2026 22:58:30]  System: The world is saving, please wait.
+[06/03/2026 22:58:30]  System: World save complete. The entire process took 0.1 seconds.
+[06/03/2026 22:58:30]  System: World save completed in 0.1 seconds.
+[06/03/2026 22:59:04]  a raven: a raven
+[06/03/2026 23:01:19]  Bialy: Bialy
+[06/03/2026 23:03:02]  System: The world will save in 30 seconds.
+[06/03/2026 23:03:32]  System: The world is saving, please wait.
+[06/03/2026 23:03:32]  System: World save complete. The entire process took 0.1 seconds.
+[06/03/2026 23:03:32]  System: World save completed in 0.1 seconds.
+[06/03/2026 23:03:59]  a cat: a cat
+[06/03/2026 23:04:25]  a cat: a cat
+[06/03/2026 23:05:17]  a cat: a cat
+[06/03/2026 23:06:16]  a cat: a cat
+[06/03/2026 23:07:45]  Bialy: Bialy
+[06/03/2026 23:08:00]  a cat: a cat
+[06/03/2026 23:08:03]  a cat: a cat
+[06/03/2026 23:08:06]  System: The world will save in 30 seconds.
+[06/03/2026 23:08:14]  a cat: a cat
+[06/03/2026 23:08:30]  Bialy: Bialy
+[06/03/2026 23:08:36]  System: The world is saving, please wait.
+[06/03/2026 23:08:36]  System: World save complete. The entire process took 0.1 seconds.
+[06/03/2026 23:08:36]  System: World save completed in 0.1 seconds.
+[06/03/2026 23:09:00]  a cat: a cat
+[06/03/2026 23:10:28]  a cat: a cat
+[06/03/2026 23:12:02]  wooden shingles
+[06/03/2026 23:12:04]  System: You have initiated server shutdown.
+[06/03/2026 23:12:07]  System: The server is going down shortly.
+[06/03/2026 23:12:07]  System: The world is saving, please wait.
+[06/03/2026 23:12:07]  System: World save complete. The entire process took 0.1 seconds.
+[06/03/2026 23:12:07]  System: World save completed in 0.1 seconds.
+[06/03/2026 23:12:07]  System: The server has shut down.

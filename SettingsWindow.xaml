@@ -1,0 +1,135 @@
+<Window x:Class="SkythornLauncher.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SkythornLauncher"
+        Title="Settings"
+        Width="{x:Static local:SubWindowMetrics.WindowWidth}"
+        Height="{x:Static local:SubWindowMetrics.WindowHeight}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        FontFamily="{DynamicResource FantasyFont}">
+    <Grid Width="{x:Static local:SubWindowMetrics.WindowWidth}"
+          Height="{x:Static local:SubWindowMetrics.WindowHeight}">
+        <Image Source="pack://siteoforigin:,,,/Assets/settings-background.png"
+               Stretch="Fill"
+               Width="{x:Static local:SubWindowMetrics.WindowWidth}"
+               Height="{x:Static local:SubWindowMetrics.WindowHeight}"
+               RenderOptions.BitmapScalingMode="HighQuality"/>
+
+        <Grid Margin="{x:Static local:SubWindowMetrics.ContentMargin}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <CheckBox x:Name="SkipLoginScreenBox"
+                              Style="{StaticResource SubWindowCheckBox}"
+                              Content="Skip login and server selection"
+                              Margin="0,0,0,8"/>
+                    <CheckBox x:Name="AutoLoginBox"
+                              Style="{StaticResource SubWindowCheckBox}"
+                              Content="Play as last character"
+                              Margin="0,0,0,8"/>
+                    <CheckBox x:Name="AutoReconnectBox"
+                              Style="{StaticResource SubWindowCheckBox}"
+                              Content="Auto reconnect"
+                              Margin="0,0,0,8"/>
+                    <CheckBox x:Name="SaveAccountBox"
+                              Style="{StaticResource SubWindowCheckBox}"
+                              Content="Save account credentials"
+                              Margin="0,0,0,8"/>
+                    <CheckBox x:Name="PacketLogBox"
+                              Style="{StaticResource SubWindowCheckBox}"
+                              Content="Enable packet log"
+                              Margin="0,0,0,8"/>
+                    <CheckBox x:Name="MusicBox"
+                              Style="{StaticResource SubWindowCheckBox}"
+                              Content="Enable login music"
+                              Margin="0,0,0,8"/>
+                    <CheckBox x:Name="HighDpiBox"
+                              Style="{StaticResource SubWindowCheckBox}"
+                              Content="High DPI mode"
+                              Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Reconnect delay (ms)" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                    <TextBox x:Name="ReconnectDelayBox"
+                             Height="28"
+                             Margin="0,0,0,12"
+                             Style="{StaticResource SubWindowField}"/>
+
+                    <TextBlock Text="Music volume" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                    <Slider x:Name="MusicVolumeSlider"
+                            Minimum="0"
+                            Maximum="100"
+                            TickFrequency="5"
+                            IsSnapToTickEnabled="True"
+                            Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Backend graphics driver" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                    <ComboBox x:Name="DriverBox"
+                              Height="28"
+                              Margin="0,0,0,12"
+                              Style="{StaticResource SubWindowCombo}">
+                        <ComboBoxItem Content="Default" Tag="0"/>
+                        <ComboBoxItem Content="OpenGL" Tag="1"/>
+                        <ComboBoxItem Content="Vulkan" Tag="2"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Ultima Online game files path" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="GamePathBox"
+                                 Grid.Column="0"
+                                 Height="28"
+                                 Margin="0,0,8,0"
+                                 Style="{StaticResource SubWindowField}"/>
+                        <Button Grid.Column="1"
+                                Content="Browse"
+                                Width="80"
+                                Height="28"
+                                Style="{StaticResource SubWindowSecondaryButton}"
+                                Click="Browse_Click"/>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <StackPanel Grid.Row="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,12,0,0">
+                <Button Content="Cancel"
+                        Width="90"
+                        Height="32"
+                        Margin="0,0,8,0"
+                        Style="{StaticResource SubWindowCancelButton}"
+                        Click="Cancel_Click"/>
+                <Button Content="Save Changes"
+                        Width="120"
+                        Height="32"
+                        Style="{StaticResource SubWindowPrimaryButton}"
+                        Click="Save_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <Button Content="✕"
+                Width="26"
+                Height="26"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,6,8,0"
+                Panel.ZIndex="20"
+                Background="#66000000"
+                Foreground="#DDDDDD"
+                BorderThickness="0"
+                Click="Close_Click"/>
+    </Grid>
+</Window>

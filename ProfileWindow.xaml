@@ -1,0 +1,101 @@
+<Window x:Class="SkythornLauncher.ProfileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SkythornLauncher"
+        Title="Profiles"
+        Width="{x:Static local:SubWindowMetrics.WindowWidth}"
+        Height="{x:Static local:SubWindowMetrics.WindowHeight}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        FontFamily="{DynamicResource FantasyFont}">
+    <Grid Width="{x:Static local:SubWindowMetrics.WindowWidth}"
+          Height="{x:Static local:SubWindowMetrics.WindowHeight}">
+        <Image Source="pack://siteoforigin:,,,/Assets/profiles-background.png"
+               Stretch="Fill"
+               Width="{x:Static local:SubWindowMetrics.WindowWidth}"
+               Height="{x:Static local:SubWindowMetrics.WindowHeight}"
+               RenderOptions.BitmapScalingMode="HighQuality"/>
+
+        <Grid Margin="{x:Static local:SubWindowMetrics.ContentMargin}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ListBox x:Name="ProfileList"
+                     Style="{StaticResource SubWindowList}"
+                     SelectionChanged="ProfileList_SelectionChanged"/>
+
+            <StackPanel Grid.Row="1" Margin="0,12,0,0">
+                <TextBlock Text="Account Name" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                <TextBox x:Name="UsernameBox"
+                         Height="28"
+                         Margin="0,0,0,8"
+                         Style="{StaticResource SubWindowField}"/>
+
+                <TextBlock Text="Password" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                <PasswordBox x:Name="PasswordBox"
+                             Height="28"
+                             Margin="0,0,0,8"
+                             Style="{StaticResource SubWindowPassword}"/>
+
+                <CheckBox x:Name="SaveAccountBox"
+                          Style="{StaticResource SubWindowCheckBox}"
+                          Content="Save account credentials in this profile"/>
+            </StackPanel>
+
+            <Grid Grid.Row="2" Margin="0,14,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Content="New"
+                        Width="72"
+                        Height="30"
+                        Margin="0,0,8,0"
+                        Style="{StaticResource SubWindowSecondaryButton}"
+                        Click="New_Click"/>
+                <Button Grid.Column="1"
+                        Content="Delete"
+                        Width="72"
+                        Height="30"
+                        Margin="0,0,8,0"
+                        Style="{StaticResource SubWindowSecondaryButton}"
+                        Click="Delete_Click"/>
+                <Button Grid.Column="3"
+                        Content="Cancel"
+                        Width="82"
+                        Height="30"
+                        Margin="0,0,8,0"
+                        Style="{StaticResource SubWindowCancelButton}"
+                        Click="Cancel_Click"/>
+                <Button Grid.Column="4"
+                        Content="Use Profile"
+                        Width="104"
+                        Height="30"
+                        Style="{StaticResource SubWindowPrimaryButton}"
+                        Click="Save_Click"/>
+            </Grid>
+        </Grid>
+
+        <Button Content="✕"
+                Width="26"
+                Height="26"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,6,8,0"
+                Panel.ZIndex="20"
+                Background="#66000000"
+                Foreground="#DDDDDD"
+                BorderThickness="0"
+                Click="Close_Click"/>
+    </Grid>
+</Window>

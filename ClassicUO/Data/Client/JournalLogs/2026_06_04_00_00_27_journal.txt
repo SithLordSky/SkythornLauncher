@@ -1,0 +1,28 @@
+[06/04/2026 00:00:27]  System: Welcome, Glenwill! There are currently 2 users online, with 95641 items and 1411 mobiles in the world.
+[06/04/2026 00:00:27]  System: Welcome back to Britannia, Adventurer!
+[06/04/2026 00:00:27]  Glenwill: Glenwill
+[06/04/2026 00:00:27]  Balia: Balia the bowyer
+[06/04/2026 00:00:27]  Merill: Merill the armorer
+[06/04/2026 00:00:27]  Bialy: Bialy
+[06/04/2026 00:00:27]  a rat: a rat
+[06/04/2026 00:00:32]  a rat: a rat
+[06/04/2026 00:00:38]  a rat: a rat
+[06/04/2026 00:00:49]  System: You have left the protection of the town guards.
+[06/04/2026 00:00:49]  Skythorn: Skythorn
+[06/04/2026 00:04:37]  System: The world will save in 30 seconds.
+[06/04/2026 00:05:07]  System: The world is saving, please wait.
+[06/04/2026 00:05:08]  System: World save complete. The entire process took 0.2 seconds.
+[06/04/2026 00:05:08]  System: World save completed in 0.2 seconds.
+[06/04/2026 00:09:43]  System: The world will save in 30 seconds.
+[06/04/2026 00:10:14]  System: The world is saving, please wait.
+[06/04/2026 00:10:14]  System: World save complete. The entire process took 0.1 seconds.
+[06/04/2026 00:10:14]  System: World save completed in 0.1 seconds.
+[06/04/2026 00:14:49]  System: The world will save in 30 seconds.
+[06/04/2026 00:15:20]  System: The world is saving, please wait.
+[06/04/2026 00:15:20]  System: World save complete. The entire process took 0.1 seconds.
+[06/04/2026 00:15:20]  System: World save completed in 0.1 seconds.
+[06/04/2026 00:19:44]  System: The server is going down shortly.
+[06/04/2026 00:19:44]  System: The world is saving, please wait.
+[06/04/2026 00:19:44]  System: World save complete. The entire process took 0.1 seconds.
+[06/04/2026 00:19:44]  System: World save completed in 0.1 seconds.
+[06/04/2026 00:19:44]  System: The server has shut down.

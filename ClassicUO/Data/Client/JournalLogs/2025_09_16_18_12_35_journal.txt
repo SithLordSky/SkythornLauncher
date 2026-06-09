@@ -1,0 +1,52 @@
+[09/16/2025 18:12:35]  System: WorldMap loading...
+[09/16/2025 18:12:35]  System: Loading WorldMap markers..
+[09/16/2025 18:12:35]  System: WorldMap markers loaded (0)
+[09/16/2025 18:12:35]  System: Welcome, Skythorn! There is currently 1 user online, with 95658 items and 1471 mobiles in the world.
+[09/16/2025 18:12:35]  System: Hail, Lord Skythorn himself!
+Thou art the master of this realm, the weaver of worlds, the keeper of the sacred code. All bow before thy might, and all tremble at thy command. May thy reign be long and thy server stable. Thou art the one true owner of Lord Skythorn's Revenge!
+
+Now go forth and fix those bugs, lest the peasants revolt and demand refunds for their monthly subscription of zero gold pieces!
+[09/16/2025 18:12:35]  Skythorn: Skythorn
+[09/16/2025 18:12:35]  Donata: Donata the innkeeper
+[09/16/2025 18:12:35]  a crow: a crow
+[09/16/2025 18:12:35]  a rat: a rat
+[09/16/2025 18:12:35]  a crow: a crow
+[09/16/2025 18:12:36]  System: WorldMap loaded!
+[09/16/2025 18:12:37]  a cat: a cat
+[09/16/2025 18:12:40]  a dog: a dog
+[09/16/2025 18:12:47]  Donata: Donata the innkeeper
+[09/16/2025 18:12:48]  a cat: a cat
+[09/16/2025 18:12:49]  a dog: a dog
+[09/16/2025 18:12:49]  Karlenne: Karlenne the healer
+[09/16/2025 18:12:50]  Ramsey: Ramsey
+[09/16/2025 18:12:50]  a rat: a rat
+[09/16/2025 18:13:24]  a rat: a rat
+[09/16/2025 18:13:41]  a crow: a crow
+[09/16/2025 18:13:42]  Ramsey: Ramsey
+[09/16/2025 18:13:45]  a rat: a rat
+[09/16/2025 18:13:59]  a lapwing: a lapwing
+[09/16/2025 18:14:23]  Ramsey: Ramsey
+[09/16/2025 18:14:32]  a magpie: a magpie
+[09/16/2025 18:14:37]  Karlenne: Karlenne the healer
+[09/16/2025 18:14:55]  Ramsey: Ramsey
+[09/16/2025 18:14:56]  Bialy: Bialy
+[09/16/2025 18:14:57]  Merill: Merill the armorer
+[09/16/2025 18:14:58]  a magpie: a magpie
+[09/16/2025 18:15:02]  a dog: a dog
+[09/16/2025 18:15:03]  Kamaria: Kamaria the mage
+[09/16/2025 18:15:03]  Virgil: Virgil the alchemist
+[09/16/2025 18:15:03]  Seward: Seward
+[09/16/2025 18:15:04]  a cat: a cat
+[09/16/2025 18:15:04]  Joan: Joan the animal trainer
+[09/16/2025 18:15:07]  a magpie: a magpie
+[09/16/2025 18:15:08]  Merill: Merill the armorer
+[09/16/2025 18:15:09]  Bialy: Bialy
+[09/16/2025 18:15:11]  Donata: Donata the innkeeper
+[09/16/2025 18:15:11]  Karlenne: Karlenne the healer
+[09/16/2025 18:15:11]  Ramsey: Ramsey
+[09/16/2025 18:15:11]  a magpie: a magpie
+[09/16/2025 18:15:18]  System: The world will save in 30 seconds.
+[09/16/2025 18:15:48]  System: The world is saving, please wait.
+[09/16/2025 18:15:49]  System: World save complete. The entire process took 0.1 seconds.
+[09/16/2025 18:15:49]  System: World save completed in 0.1 seconds.
+[09/16/2025 18:16:18]  Merill: Merill the armorer
