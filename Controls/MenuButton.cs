@@ -33,6 +33,12 @@ public sealed class MenuButton : Button
     public static readonly DependencyProperty HoverHeightProperty =
         DependencyProperty.Register(nameof(HoverHeight), typeof(double), typeof(MenuButton), new PropertyMetadata(double.NaN));
 
+    public static readonly DependencyProperty HoverLeftOffsetProperty =
+        DependencyProperty.Register(nameof(HoverLeftOffset), typeof(double), typeof(MenuButton), new PropertyMetadata(0.0));
+
+    public static readonly DependencyProperty HoverWidthProperty =
+        DependencyProperty.Register(nameof(HoverWidth), typeof(double), typeof(MenuButton), new PropertyMetadata(double.NaN));
+
     private Image? _normalImage;
     private Image? _hoverImage;
 
@@ -82,6 +88,18 @@ public sealed class MenuButton : Button
         set => SetValue(HoverHeightProperty, value);
     }
 
+    public double HoverLeftOffset
+    {
+        get => (double)GetValue(HoverLeftOffsetProperty);
+        set => SetValue(HoverLeftOffsetProperty, value);
+    }
+
+    public double HoverWidth
+    {
+        get => (double)GetValue(HoverWidthProperty);
+        set => SetValue(HoverWidthProperty, value);
+    }
+
     private static void OnImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not MenuButton button)
@@ -123,9 +141,10 @@ public sealed class MenuButton : Button
 
         var normalHeight = double.IsNaN(NormalHeight) ? Height : NormalHeight;
         var hoverHeight = double.IsNaN(HoverHeight) ? Height : HoverHeight;
+        var hoverWidth = double.IsNaN(HoverWidth) ? Width : HoverWidth;
 
         _normalImage = CreateArtImage(NormalImageSource, Width, normalHeight);
-        _hoverImage = CreateArtImage(HoverImageSource, Width, hoverHeight);
+        _hoverImage = CreateArtImage(HoverImageSource, hoverWidth, hoverHeight);
         _hoverImage.Visibility = Visibility.Collapsed;
 
         var artCanvas = new Canvas
@@ -139,7 +158,7 @@ public sealed class MenuButton : Button
         artCanvas.Children.Add(_hoverImage);
         Canvas.SetLeft(_normalImage, 0);
         Canvas.SetTop(_normalImage, NormalTopOffset);
-        Canvas.SetLeft(_hoverImage, 0);
+        Canvas.SetLeft(_hoverImage, HoverLeftOffset);
         Canvas.SetTop(_hoverImage, HoverTopOffset);
 
         canvas.Children.Insert(canvas.Children.IndexOf(this), artCanvas);
