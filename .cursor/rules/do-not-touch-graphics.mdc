@@ -1,0 +1,28 @@
+---
+description: Do not modify launcher graphics unless the user explicitly requests it
+alwaysApply: true
+---
+
+# SkythornLauncher graphics — hands off
+
+Never modify, export, replace, copy over, or commit changes to graphics/assets unless the user **explicitly** asks (e.g. "update the backgrounds", "export buttons from PXZ").
+
+## Protected by default
+
+- `Assets/profiles-background.png`
+- `Assets/settings-background.png`
+- `Assets/home-background.png`
+- Everything under `Assets/` (PNG, ICO, fonts used as art, menu button images)
+
+## Allowed without asking
+
+- Code/XAML that **references** existing asset paths (no file replacement)
+- `publish.ps1` already preserves the two menu backgrounds; do not weaken that
+
+## Forbidden unless explicitly requested
+
+- Pulling art from PXZ, OneDrive, or other folders into `Assets/`
+- Running or changing export scripts that write into `Assets/`
+- Overwriting backgrounds during publish, build, or git operations
+
+When in doubt, ask before touching any file under `Assets/`.

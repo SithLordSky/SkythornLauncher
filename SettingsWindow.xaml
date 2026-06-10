@@ -25,21 +25,9 @@
                           HorizontalScrollBarVisibility="Disabled"
                           Margin="0,0,0,52">
                 <StackPanel>
-                    <CheckBox x:Name="SkipLoginScreenBox"
-                              Style="{StaticResource SubWindowCheckBox}"
-                              Content="Skip login and server selection"
-                              Margin="0,0,0,8"/>
-                    <CheckBox x:Name="AutoLoginBox"
-                              Style="{StaticResource SubWindowCheckBox}"
-                              Content="Play as last character"
-                              Margin="0,0,0,8"/>
                     <CheckBox x:Name="AutoReconnectBox"
                               Style="{StaticResource SubWindowCheckBox}"
                               Content="Auto reconnect"
-                              Margin="0,0,0,8"/>
-                    <CheckBox x:Name="SaveAccountBox"
-                              Style="{StaticResource SubWindowCheckBox}"
-                              Content="Save account credentials"
                               Margin="0,0,0,8"/>
                     <CheckBox x:Name="PacketLogBox"
                               Style="{StaticResource SubWindowCheckBox}"

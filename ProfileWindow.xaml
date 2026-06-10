@@ -43,9 +43,17 @@
                              Margin="0,0,0,8"
                              Style="{StaticResource SubWindowPassword}"/>
 
+                <CheckBox x:Name="SkipLoginScreenBox"
+                          Style="{StaticResource SubWindowCheckBox}"
+                          Content="Skip login and server selection"
+                          Margin="0,0,0,8"/>
+                <CheckBox x:Name="AutoLoginBox"
+                          Style="{StaticResource SubWindowCheckBox}"
+                          Content="Play as last character"
+                          Margin="0,0,0,8"/>
                 <CheckBox x:Name="SaveAccountBox"
                           Style="{StaticResource SubWindowCheckBox}"
-                          Content="Save account credentials in this profile"/>
+                          Content="Save account credentials"/>
             </StackPanel>
         </Grid>
 

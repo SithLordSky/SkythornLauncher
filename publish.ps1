@@ -14,7 +14,29 @@ dotnet publish (Join-Path $root "SkythornLauncher.csproj") -c Release -r win-x64
 dotnet publish (Join-Path $root "ShardStatusServer\ShardStatusServer.csproj") -c Release -r win-x64 -o (Join-Path $stage "StatusServer")
 
 Get-ChildItem $stage -File | ForEach-Object { Copy-Item $_.FullName $root -Force }
-Copy-Item (Join-Path $stage "Assets") $root -Recurse -Force
+
+# Copy Assets except user-owned menu backgrounds (never overwrite those during publish).
+$assetsStage = Join-Path $stage "Assets"
+$assetsRoot = Join-Path $root "Assets"
+$protectedBackgrounds = @("profiles-background.png", "settings-background.png")
+if (Test-Path $assetsStage) {
+    Get-ChildItem $assetsStage -Recurse -File | ForEach-Object {
+        $relative = $_.FullName.Substring($assetsStage.Length).TrimStart('\', '/')
+        $fileName = Split-Path $relative -Leaf
+        $dest = Join-Path $assetsRoot $relative
+        if ($protectedBackgrounds -contains $fileName -and (Test-Path $dest)) {
+            Write-Host "Preserved $relative"
+            return
+        }
+
+        $destDir = Split-Path $dest -Parent
+        if (-not (Test-Path $destDir)) {
+            New-Item -ItemType Directory -Path $destDir -Force | Out-Null
+        }
+
+        Copy-Item $_.FullName $dest -Force
+    }
+}
 
 $statusDest = Join-Path $root "StatusServer"
 if (Test-Path $statusDest) {
