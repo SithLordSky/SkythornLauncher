@@ -23,10 +23,7 @@ public partial class SettingsWindow : Window
     private void LoadFromProfile()
     {
         var prefs = _profile.Preferences;
-        SkipLoginScreenBox.IsChecked = prefs.SkipLoginScreen;
-        AutoLoginBox.IsChecked = prefs.AutoLogin;
         AutoReconnectBox.IsChecked = prefs.AutoReconnect;
-        SaveAccountBox.IsChecked = prefs.SaveAccount || _profile.SaveAccount;
         PacketLogBox.IsChecked = prefs.EnablePacketLog;
         MusicBox.IsChecked = prefs.EnableMusic;
         HighDpiBox.IsChecked = prefs.HighDpi;
@@ -82,15 +79,15 @@ public partial class SettingsWindow : Window
             Username = _profile.Username,
             PasswordProtected = _profile.PasswordProtected,
             UltimaOnlineDirectory = GamePathBox.Text.Trim(),
-            SaveAccount = SaveAccountBox.IsChecked == true,
+            SaveAccount = _profile.SaveAccount,
             LastUsedUtc = _profile.LastUsedUtc,
             Preferences = new ClientPreferences
             {
-                SkipLoginScreen = SkipLoginScreenBox.IsChecked == true,
-                AutoLogin = AutoLoginBox.IsChecked == true,
+                SkipLoginScreen = _profile.Preferences.SkipLoginScreen,
+                AutoLogin = _profile.Preferences.AutoLogin,
                 AutoReconnect = AutoReconnectBox.IsChecked == true,
                 ReconnectDelayMs = reconnectMs,
-                SaveAccount = SaveAccountBox.IsChecked == true,
+                SaveAccount = _profile.Preferences.SaveAccount,
                 EnablePacketLog = PacketLogBox.IsChecked == true,
                 EnableMusic = MusicBox.IsChecked == true,
                 HighDpi = HighDpiBox.IsChecked == true,

@@ -78,7 +78,9 @@ public partial class ProfileWindow : Window
         PasswordBox.Password = _selectedProfile.HasSavedPassword
             ? SecretProtector.Unprotect(_selectedProfile.PasswordProtected)
             : string.Empty;
-        SaveAccountBox.IsChecked = _selectedProfile.SaveAccount;
+        SkipLoginScreenBox.IsChecked = _selectedProfile.Preferences.SkipLoginScreen;
+        AutoLoginBox.IsChecked = _selectedProfile.Preferences.AutoLogin;
+        SaveAccountBox.IsChecked = _selectedProfile.SaveAccount || _selectedProfile.Preferences.SaveAccount;
     }
 
     private void New_Click(object sender, RoutedEventArgs e)
@@ -128,6 +130,9 @@ public partial class ProfileWindow : Window
 
         _selectedProfile.Username = UsernameBox.Text.Trim();
         _selectedProfile.SaveAccount = SaveAccountBox.IsChecked == true;
+        _selectedProfile.Preferences.SkipLoginScreen = SkipLoginScreenBox.IsChecked == true;
+        _selectedProfile.Preferences.AutoLogin = AutoLoginBox.IsChecked == true;
+        _selectedProfile.Preferences.SaveAccount = SaveAccountBox.IsChecked == true;
 
         var password = PasswordBox.Password;
         if (_selectedProfile.SaveAccount && !string.IsNullOrEmpty(password))

@@ -34,6 +34,18 @@
     <Content Include="Assets\Menu\profile-hover.png" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\Menu\settings.png" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\Menu\settings-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\new.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\new-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\delete.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\delete-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\cancel.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\cancel-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\save.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\save-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Settings\cancel.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Settings\cancel-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Settings\save.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Settings\save-hover.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
