@@ -37,6 +37,7 @@ internal static class SettingsWriter
         settings["reconnect_time"] = Math.Max(1000, prefs.ReconnectDelayMs);
         settings["login_music"] = prefs.EnableMusic;
         settings["login_music_volume"] = Math.Clamp(prefs.MusicVolume, 0, 100);
+        settings["footsteps_volume"] = Math.Clamp(prefs.FootstepsVolume, 0, 100);
         settings["force_driver"] = prefs.ForceDriver;
 
         if (!settings.ContainsKey("lang"))
@@ -86,6 +87,15 @@ internal static class SettingsWriter
         if (settings.TryGetValue("login_music_volume", out var volume) && TryReadInt(volume, out var vol))
         {
             prefs.MusicVolume = vol;
+        }
+
+        if (settings.TryGetValue("footsteps_volume", out var footstepsVolume) && TryReadInt(footstepsVolume, out var footVol))
+        {
+            prefs.FootstepsVolume = footVol;
+        }
+        else if (settings.TryGetValue("default_footsteps_volume", out var legacyFootstepsVolume) && TryReadInt(legacyFootstepsVolume, out var legacyFootVol))
+        {
+            prefs.FootstepsVolume = legacyFootVol;
         }
 
         if (settings.TryGetValue("force_driver", out var driver) && TryReadInt(driver, out var drv))

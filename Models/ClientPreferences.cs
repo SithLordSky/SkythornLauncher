@@ -12,5 +12,6 @@ public sealed class ClientPreferences
     public bool EnableMusic { get; set; } = true;
     public bool HighDpi { get; set; }
     public int MusicVolume { get; set; } = 50;
+    public int FootstepsVolume { get; set; } = 75;
     public byte ForceDriver { get; set; }
 }
