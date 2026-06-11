@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using SkythornLauncher.Models;
@@ -10,14 +11,21 @@ public partial class MainWindow : Window
 {
     private readonly ProfileStore _profileStore = new();
     private readonly ServerStatusService _serverStatus = new();
+    private readonly LauncherMusicService _launcherMusic = new();
     private LauncherState _state = new();
     private bool _isLaunching;
+    private Process? _gameProcess;
 
     public MainWindow()
     {
         InitializeComponent();
         Loaded += MainWindow_Loaded;
-        Closed += (_, _) => _serverStatus.Dispose();
+        Closed += (_, _) =>
+        {
+            DetachGameProcessMonitor();
+            _launcherMusic.Dispose();
+            _serverStatus.Dispose();
+        };
         _serverStatus.StatusUpdated += ApplyServerStatus;
         MouseLeftButtonDown += (_, e) =>
         {
@@ -42,6 +50,7 @@ public partial class MainWindow : Window
             }
 
             RefreshProfileDisplay(active);
+            StartLauncherMusic(active);
             await _serverStatus.RefreshAsync();
         }
         catch (Exception ex)
@@ -49,6 +58,52 @@ public partial class MainWindow : Window
             StatusValueText.Text = "Error";
             MessageBox.Show(this, ex.Message, "Launcher", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+    }
+
+    private void StartLauncherMusic(LauncherProfile profile)
+    {
+        _launcherMusic.Play(profile);
+    }
+
+    private void StopLauncherMusic()
+    {
+        _launcherMusic.Stop();
+    }
+
+    private void MonitorGameProcess(Process process)
+    {
+        DetachGameProcessMonitor();
+
+        _gameProcess = process;
+        if (process.HasExited)
+        {
+            ResumeLauncherMusicAfterGame();
+            return;
+        }
+
+        process.Exited += OnGameProcessExited;
+    }
+
+    private void DetachGameProcessMonitor()
+    {
+        if (_gameProcess == null)
+        {
+            return;
+        }
+
+        _gameProcess.Exited -= OnGameProcessExited;
+        _gameProcess = null;
+    }
+
+    private void OnGameProcessExited(object? sender, EventArgs e)
+    {
+        Dispatcher.BeginInvoke(ResumeLauncherMusicAfterGame);
+    }
+
+    private void ResumeLauncherMusicAfterGame()
+    {
+        DetachGameProcessMonitor();
+        StartLauncherMusic(FindActiveProfile());
     }
 
     private static bool IsEmptyPreferences(ClientPreferences prefs)
@@ -146,6 +201,7 @@ public partial class MainWindow : Window
             _isLaunching = true;
             PlayButton.IsEnabled = false;
             StatusValueText.Text = "Launching...";
+            StopLauncherMusic();
 
             var profile = FindActiveProfile();
             profile.LastUsedUtc = DateTime.UtcNow;
@@ -171,6 +227,15 @@ public partial class MainWindow : Window
                     "Launch Failed",
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning);
+                ResumeLauncherMusicAfterGame();
+            }
+            else if (result.Process.HasExited)
+            {
+                ResumeLauncherMusicAfterGame();
+            }
+            else
+            {
+                MonitorGameProcess(result.Process);
             }
 
             _profileStore.Save(_state);
@@ -179,6 +244,7 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             MessageBox.Show(this, ex.Message, "Launch Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+            ResumeLauncherMusicAfterGame();
         }
         finally
         {
