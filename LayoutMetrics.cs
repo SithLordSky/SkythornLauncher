@@ -73,6 +73,8 @@ public static class LayoutMetrics
 
     public const double LauncherVersionValueLeft = 286;
     public const double LauncherVersionValueTop = 568;
+    public const double ServerVersionValueLeft = 671;
+    public const double ServerVersionValueTop = 568;
 
     public const double RedPanelValueWidth = 230;
     public const double StatsValueWidth = 150;

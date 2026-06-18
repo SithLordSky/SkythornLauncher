@@ -35,7 +35,7 @@
                               Margin="0,0,0,8"/>
                     <CheckBox x:Name="MusicBox"
                               Style="{StaticResource SubWindowCheckBox}"
-                              Content="Enable login music"
+                              Content="Enable login music (in game)"
                               Margin="0,0,0,8"/>
                     <CheckBox x:Name="HighDpiBox"
                               Style="{StaticResource SubWindowCheckBox}"

@@ -16,6 +16,25 @@ internal static class UiFormat
         return "..." + path[^Math.Min(maxLength - 3, path.Length)..];
     }
 
+    public static string TrimExcerpt(string? text, int maxLength = 110)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return string.Empty;
+        }
+
+        var normalized = text.Trim();
+        if (normalized.Length <= maxLength)
+        {
+            return normalized;
+        }
+
+        return normalized[..maxLength].TrimEnd() + "...";
+    }
+
+    public static string FormatNewsDate(DateTime? date) =>
+        date?.ToLocalTime().ToString("MMM d, yyyy") ?? string.Empty;
+
     public static string FormatUptime(TimeSpan? uptime)
     {
         if (uptime == null)
