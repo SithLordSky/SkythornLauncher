@@ -9,7 +9,6 @@
     <AssemblyName>SkythornLauncher</AssemblyName>
     <RootNamespace>SkythornLauncher</RootNamespace>
     <ApplicationIcon>Assets\app.ico</ApplicationIcon>
-    <DefaultItemExcludes>$(DefaultItemExcludes);ShardStatusServer\**</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>

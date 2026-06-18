@@ -1,9 +1,9 @@
-# Publishes to a staging folder, then copies runtime files to the install root.
+# Publishes the player launcher only. Server sidecar lives in D:\LBRServerStatus.
 $ErrorActionPreference = "Stop"
 $root = $PSScriptRoot
 $stage = Join-Path $root ".publish"
 
-Stop-Process -Name SkythornLauncher,ShardStatusServer -ErrorAction SilentlyContinue
+Stop-Process -Name SkythornLauncher -ErrorAction SilentlyContinue
 Start-Sleep -Milliseconds 500
 
 if (Test-Path $stage) {
@@ -11,7 +11,6 @@ if (Test-Path $stage) {
 }
 
 dotnet publish (Join-Path $root "SkythornLauncher.csproj") -c Release -r win-x64 -o $stage
-dotnet publish (Join-Path $root "ShardStatusServer\ShardStatusServer.csproj") -c Release -r win-x64 -o (Join-Path $stage "StatusServer")
 
 Get-ChildItem $stage -File | ForEach-Object { Copy-Item $_.FullName $root -Force }
 
@@ -38,20 +37,21 @@ if (Test-Path $assetsStage) {
     }
 }
 
-$statusDest = Join-Path $root "StatusServer"
-if (Test-Path $statusDest) {
-    Remove-Item $statusDest -Recurse -Force
-}
-Copy-Item (Join-Path $stage "StatusServer") $statusDest -Recurse -Force
-
 Remove-Item $stage -Recurse -Force
 
-# Clean legacy / build clutter (keep source, Assets, ClassicUO, Client, StatusServer runtime)
+# Player install must not include server-sidecar artifacts.
+foreach ($legacy in @("StatusServer", "ServerPack", "ShardStatusServer")) {
+    $legacyPath = Join-Path $root $legacy
+    if (Test-Path $legacyPath) {
+        Remove-Item $legacyPath -Recurse -Force
+        Write-Host "Removed $legacy from player install"
+    }
+}
+
+# Clean legacy / build clutter (keep source, Assets, ClassicUO, Client)
 $cleanPaths = @(
     (Join-Path $root "bin"),
-    (Join-Path $root ".publish"),
-    (Join-Path $root "ShardStatusServer\bin"),
-    (Join-Path $root "ShardStatusServer\obj")
+    (Join-Path $root ".publish")
 )
 foreach ($path in $cleanPaths) {
     if (Test-Path $path) {
@@ -60,6 +60,5 @@ foreach ($path in $cleanPaths) {
 }
 
 Get-ChildItem $root -Filter "*.pdb" -File -ErrorAction SilentlyContinue | Remove-Item -Force
-Get-ChildItem (Join-Path $root "StatusServer") -Filter "*.pdb" -File -ErrorAction SilentlyContinue | Remove-Item -Force
 
-Write-Host "Published SkythornLauncher.exe to $root (cleaned legacy bin and build artifacts)"
+Write-Host "Published SkythornLauncher.exe to $root (player build only)"
