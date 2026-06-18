@@ -46,8 +46,6 @@ internal sealed class ServerStatusService : IDisposable
 
         if (!string.IsNullOrWhiteSpace(LauncherConstants.StatusApiUrl))
         {
-            await ShardStatusServerBootstrap.EnsureRunningAsync(_http);
-
             try
             {
                 var json = await _http.GetStringAsync(LauncherConstants.StatusApiUrl);
@@ -60,7 +58,7 @@ internal sealed class ServerStatusService : IDisposable
             }
             catch
             {
-                // Fall through to local status file.
+                // Remote status unavailable.
             }
         }
 

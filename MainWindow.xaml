@@ -95,13 +95,10 @@
                        Width="{x:Static local:LayoutMetrics.RedPanelValueWidth}"
                        Text="Default"/>
 
-            <TextBlock x:Name="NewsValueText"
-                       Style="{StaticResource DynamicValueText}"
-                       Canvas.Left="{x:Static local:LayoutMetrics.NewsValueLeft}"
-                       Canvas.Top="{x:Static local:LayoutMetrics.NewsValueTop}"
-                       Width="{x:Static local:LayoutMetrics.NewsValueWidth}"
-                       TextWrapping="Wrap"
-                       Text="It's coming!"/>
+            <StackPanel x:Name="NewsPanel"
+                        Canvas.Left="{x:Static local:LayoutMetrics.NewsValueLeft}"
+                        Canvas.Top="{x:Static local:LayoutMetrics.NewsValueTop}"
+                        Width="{x:Static local:LayoutMetrics.NewsValueWidth}"/>
 
             <TextBlock x:Name="ServerTimeValueText"
                        Style="{StaticResource DynamicValueText}"
@@ -131,6 +128,14 @@
                        Width="80"
                        FontSize="{x:Static local:LayoutMetrics.LauncherVersionFontSize}"
                        Text="{x:Static local:LauncherVersionInfo.Display}"/>
+
+            <TextBlock x:Name="ServerVersionValueText"
+                       Style="{StaticResource DynamicValueText}"
+                       Canvas.Left="{x:Static local:LayoutMetrics.ServerVersionValueLeft}"
+                       Canvas.Top="{x:Static local:LayoutMetrics.ServerVersionValueTop}"
+                       Width="80"
+                       FontSize="{x:Static local:LayoutMetrics.LauncherVersionFontSize}"
+                       Text="—"/>
         </Canvas>
 
         <Button Content="✕"

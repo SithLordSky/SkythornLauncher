@@ -48,11 +48,18 @@ internal static class ShardStatusReader
             uptime = TimeSpan.FromSeconds(sec);
         }
 
+        string? version = null;
+        if (root.TryGetProperty("version", out var versionProp))
+        {
+            version = versionProp.GetString();
+        }
+
         return new ServerStatusSnapshot
         {
             Status = status,
             PlayersOnline = players,
             ServerUptime = uptime,
+            ServerVersion = version,
             EasternTime = easternTime
         };
     }

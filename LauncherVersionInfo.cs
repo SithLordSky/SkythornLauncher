@@ -1,14 +1,14 @@
 namespace SkythornLauncher;
 
 /// <summary>
-/// Launcher display version. Bump <see cref="Patch"/> by 1 on every published update (+0.0.1).
-/// When Patch is 9, the next bump rolls over: 0.1.9 → 0.2.0 → 0.2.1 … → 0.2.9 → 0.3.0, and so on.
+/// Launcher display version. Playtest line: 0.9.x; bump <see cref="Patch"/> for playtest fixes.
+/// After playtest: 1.0.0. During dev, bump Patch by 1 on each publish (+0.0.1).
 /// </summary>
 internal static class LauncherVersionInfo
 {
     public const int Major = 0;
-    public const int Minor = 2;
-    public const int Patch = 10;
+    public const int Minor = 9;
+    public const int Patch = 6;
 
     public static string Display => $"{Major}.{Minor}.{Patch}";
 }

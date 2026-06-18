@@ -3,8 +3,7 @@ namespace SkythornLauncher;
 internal static class LauncherConstants
 {
     public const string ShardName = "Lord Skythorn's Revenge";
-    // Local testing — change back to 192.168.0.1 for production v1.0.0
-    public const string ServerIp = "127.0.0.1";
+    public const string ServerIp = "195.88.56.169";
     public const ushort ServerPort = 2593;
     public const string ClientVersion = "3.0.8q";
     public const string DefaultUltimaOnlinePath = @"C:\ProgramFiles\Ultima Online 2D";
@@ -19,9 +18,18 @@ internal static class LauncherConstants
     public const string ClientBinaryFolderName = "Client";
 
     /// <summary>
-    /// HTTP status endpoint (ShardStatusServer). Launchers never probe game port 2593.
+    /// Remote shard status HTTP endpoint (ShardStatusServer on the RunUO machine).
+    /// Launchers never probe game port 2593 and never bundle the sidecar exe.
     /// </summary>
-    public const string StatusApiUrl = "http://127.0.0.1:8080/status.json";
+    public const string StatusApiUrl = "http://195.88.56.169:8080/status.json";
+
+    /// <summary>
+    /// Wix blog RSS feed used to populate the launcher News panel.
+    /// </summary>
+    public const string NewsFeedUrl = "https://xsithlordskyx.wixsite.com/lord-skythorn/blog-feed.xml";
+
+    /// <summary>Public website opened when news cannot be loaded or the user clicks fallback text.</summary>
+    public const string WebsiteUrl = "https://xsithlordskyx.wixsite.com/lord-skythorn";
 
     public static string LauncherVersion => LauncherVersionInfo.Display;
 
