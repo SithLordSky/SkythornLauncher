@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 using SkythornLauncher.Models;
 using SkythornLauncher.Services;
@@ -11,7 +13,7 @@ public partial class MainWindow : Window
 {
     private readonly ProfileStore _profileStore = new();
     private readonly ServerStatusService _serverStatus = new();
-    private readonly LauncherMusicService _launcherMusic = new();
+    private readonly NewsService _news = new();
     private LauncherState _state = new();
     private bool _isLaunching;
     private Process? _gameProcess;
@@ -23,10 +25,11 @@ public partial class MainWindow : Window
         Closed += (_, _) =>
         {
             DetachGameProcessMonitor();
-            _launcherMusic.Dispose();
+            _news.Dispose();
             _serverStatus.Dispose();
         };
         _serverStatus.StatusUpdated += ApplyServerStatus;
+        _news.NewsUpdated += ApplyNews;
         MouseLeftButtonDown += (_, e) =>
         {
             if (e.ButtonState == MouseButtonState.Pressed)
@@ -50,24 +53,15 @@ public partial class MainWindow : Window
             }
 
             RefreshProfileDisplay(active);
-            StartLauncherMusic(active);
-            await _serverStatus.RefreshAsync();
+            await Task.WhenAll(
+                _serverStatus.RefreshAsync(),
+                _news.RefreshAsync());
         }
         catch (Exception ex)
         {
             StatusValueText.Text = "Error";
             MessageBox.Show(this, ex.Message, "Launcher", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
-    }
-
-    private void StartLauncherMusic(LauncherProfile profile)
-    {
-        _launcherMusic.Play(profile);
-    }
-
-    private void StopLauncherMusic()
-    {
-        _launcherMusic.Stop();
     }
 
     private void MonitorGameProcess(Process process)
@@ -77,7 +71,6 @@ public partial class MainWindow : Window
         _gameProcess = process;
         if (process.HasExited)
         {
-            ResumeLauncherMusicAfterGame();
             return;
         }
 
@@ -97,13 +90,7 @@ public partial class MainWindow : Window
 
     private void OnGameProcessExited(object? sender, EventArgs e)
     {
-        Dispatcher.BeginInvoke(ResumeLauncherMusicAfterGame);
-    }
-
-    private void ResumeLauncherMusicAfterGame()
-    {
-        DetachGameProcessMonitor();
-        StartLauncherMusic(FindActiveProfile());
+        Dispatcher.BeginInvoke(DetachGameProcessMonitor);
     }
 
     private static bool IsEmptyPreferences(ClientPreferences prefs)
@@ -148,7 +135,131 @@ public partial class MainWindow : Window
             ServerTimeValueText.Text = snapshot.EasternTime.ToString("h:mm tt") + " ET";
             PlayersOnlineValueText.Text = snapshot.PlayersOnline?.ToString() ?? "—";
             ServerUptimeValueText.Text = UiFormat.FormatUptime(snapshot.ServerUptime);
+            ServerVersionValueText.Text = snapshot.ServerVersion ?? "—";
         });
+    }
+
+    private void ApplyNews(NewsSnapshot snapshot)
+    {
+        Dispatcher.Invoke(() => RenderNews(snapshot));
+    }
+
+    private void RenderNews(NewsSnapshot snapshot)
+    {
+        NewsPanel.Children.Clear();
+
+        if (snapshot.IsLoading)
+        {
+            NewsPanel.Children.Add(CreateNewsMessage("Loading news..."));
+            return;
+        }
+
+        if (snapshot.Failed || snapshot.Posts.Count == 0)
+        {
+            var fallback = CreateNewsMessage("Unable to load news. Visit the website for updates.");
+            fallback.MouseLeftButtonDown += (_, _) => OpenWebsite();
+            fallback.Cursor = Cursors.Hand;
+            fallback.ToolTip = LauncherConstants.WebsiteUrl;
+            NewsPanel.Children.Add(fallback);
+            return;
+        }
+
+        for (var i = 0; i < snapshot.Posts.Count; i++)
+        {
+            if (i > 0)
+            {
+                NewsPanel.Children.Add(new Border
+                {
+                    Height = 6,
+                    Background = Brushes.Transparent
+                });
+            }
+
+            NewsPanel.Children.Add(CreateNewsItem(snapshot.Posts[i]));
+        }
+    }
+
+    private static TextBlock CreateNewsMessage(string text)
+    {
+        return new TextBlock
+        {
+            Text = text,
+            TextWrapping = TextWrapping.Wrap,
+            Foreground = new SolidColorBrush(Color.FromRgb(0xF2, 0xF2, 0xF2)),
+            FontFamily = Application.Current.TryFindResource("FantasyFont") as FontFamily,
+            FontSize = 14
+        };
+    }
+
+    private static UIElement CreateNewsItem(BlogPostItem post)
+    {
+        var panel = new StackPanel { Cursor = Cursors.Hand, ToolTip = post.Url };
+
+        var title = new TextBlock
+        {
+            Text = post.Title,
+            TextWrapping = TextWrapping.Wrap,
+            TextTrimming = TextTrimming.CharacterEllipsis,
+            MaxHeight = 20,
+            Foreground = new SolidColorBrush(Color.FromRgb(0xF7, 0xE8, 0xA8)),
+            FontFamily = Application.Current.TryFindResource("FantasyFont") as FontFamily,
+            FontSize = 14,
+            FontWeight = FontWeights.Bold
+        };
+
+        var date = new TextBlock
+        {
+            Text = UiFormat.FormatNewsDate(post.PublishedDate),
+            Foreground = new SolidColorBrush(Color.FromRgb(0xC8, 0xC8, 0xC8)),
+            FontFamily = Application.Current.TryFindResource("FantasyFont") as FontFamily,
+            FontSize = 12,
+            Margin = new Thickness(0, 1, 0, 2)
+        };
+
+        var excerpt = new TextBlock
+        {
+            Text = UiFormat.TrimExcerpt(post.Excerpt),
+            TextWrapping = TextWrapping.Wrap,
+            MaxHeight = 34,
+            Foreground = new SolidColorBrush(Color.FromRgb(0xF2, 0xF2, 0xF2)),
+            FontFamily = Application.Current.TryFindResource("FantasyFont") as FontFamily,
+            FontSize = 13
+        };
+
+        panel.Children.Add(title);
+        if (!string.IsNullOrWhiteSpace(date.Text))
+        {
+            panel.Children.Add(date);
+        }
+
+        panel.Children.Add(excerpt);
+
+        panel.MouseLeftButtonDown += (_, e) =>
+        {
+            OpenUrl(post.Url);
+            e.Handled = true;
+        };
+
+        return panel;
+    }
+
+    private static void OpenWebsite() => OpenUrl(LauncherConstants.WebsiteUrl);
+
+    private static void OpenUrl(string url)
+    {
+        if (string.IsNullOrWhiteSpace(url))
+        {
+            return;
+        }
+
+        try
+        {
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        catch
+        {
+            // Ignore browser launch failures; launcher stays usable.
+        }
     }
 
     private void Profile_Click(object sender, RoutedEventArgs e)
@@ -201,7 +312,6 @@ public partial class MainWindow : Window
             _isLaunching = true;
             PlayButton.IsEnabled = false;
             StatusValueText.Text = "Launching...";
-            StopLauncherMusic();
 
             var profile = FindActiveProfile();
             profile.LastUsedUtc = DateTime.UtcNow;
@@ -227,11 +337,11 @@ public partial class MainWindow : Window
                     "Launch Failed",
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning);
-                ResumeLauncherMusicAfterGame();
+                DetachGameProcessMonitor();
             }
             else if (result.Process.HasExited)
             {
-                ResumeLauncherMusicAfterGame();
+                DetachGameProcessMonitor();
             }
             else
             {
@@ -244,7 +354,7 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             MessageBox.Show(this, ex.Message, "Launch Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
-            ResumeLauncherMusicAfterGame();
+            DetachGameProcessMonitor();
         }
         finally
         {
