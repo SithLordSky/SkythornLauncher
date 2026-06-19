@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -28,6 +28,9 @@ if (job == null || job.Files.Count == 0)
     return 1;
 }
 
+var exitCode = 0;
+Exception? failure = null;
+
 try
 {
     WaitForProcessExit(job.WaitPid);
@@ -38,21 +41,21 @@ try
     }
 
     TryDeleteDirectory(job.StagingDir);
-
-    Process.Start(new ProcessStartInfo
-    {
-        FileName = job.LauncherExe,
-        WorkingDirectory = job.InstallRoot,
-        UseShellExecute = true
-    });
-
-    return 0;
 }
 catch (Exception ex)
 {
+    failure = ex;
+    exitCode = 1;
     Console.Error.WriteLine($"Update failed: {ex.Message}");
-    return 1;
+    WriteFailureLog(job, ex);
 }
+
+finally
+{
+    TryLaunchLauncher(job, failure != null);
+}
+
+return exitCode;
 
 static bool TryGetJobPath(string[] args, out string jobPath)
 {
@@ -90,10 +93,7 @@ static void WaitForProcessExit(int pid)
 static void ApplyFile(UpdateJob job, UpdateJobFile file)
 {
     var relativePath = file.Path.Replace('/', Path.DirectorySeparatorChar);
-    var targetPath = Path.GetFullPath(Path.Combine(job.InstallRoot, relativePath));
-    var installRoot = Path.GetFullPath(job.InstallRoot);
-
-    if (!targetPath.StartsWith(installRoot, StringComparison.OrdinalIgnoreCase))
+    if (!IsPathWithinInstallRoot(job.InstallRoot, relativePath, out var targetPath))
     {
         throw new InvalidOperationException($"Refusing to write outside install root: {file.Path}");
     }
@@ -122,6 +122,82 @@ static void ApplyFile(UpdateJob job, UpdateJobFile file)
     }
 
     File.Copy(file.Source, targetPath, overwrite: true);
+}
+
+static bool IsPathWithinInstallRoot(string installRoot, string relativePath, out string targetPath)
+{
+    targetPath = Path.GetFullPath(Path.Combine(installRoot, relativePath));
+    var normalizedRoot = NormalizeInstallRoot(installRoot);
+    var fullInstallRoot = Path.GetFullPath(installRoot);
+
+    if (string.Equals(targetPath, fullInstallRoot, StringComparison.OrdinalIgnoreCase))
+    {
+        return true;
+    }
+
+    return targetPath.StartsWith(normalizedRoot, StringComparison.OrdinalIgnoreCase);
+}
+
+static string NormalizeInstallRoot(string installRoot)
+{
+    var fullInstallRoot = Path.GetFullPath(installRoot);
+    if (!fullInstallRoot.EndsWith(Path.DirectorySeparatorChar))
+    {
+        fullInstallRoot += Path.DirectorySeparatorChar;
+    }
+
+    return fullInstallRoot;
+}
+
+static void WriteFailureLog(UpdateJob job, Exception ex)
+{
+    var logPath = Path.Combine(job.StagingDir, "update-failure.log");
+    if (string.IsNullOrWhiteSpace(job.StagingDir) || !Directory.Exists(job.StagingDir))
+    {
+        logPath = Path.Combine(job.BackupDir, "update-failure.log");
+    }
+
+    try
+    {
+        var directory = Path.GetDirectoryName(logPath);
+        if (!string.IsNullOrEmpty(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        var builder = new StringBuilder();
+        builder.AppendLine(DateTime.UtcNow.ToString("o"));
+        builder.AppendLine(ex.ToString());
+        File.WriteAllText(logPath, builder.ToString());
+    }
+    catch
+    {
+        // Best-effort logging only.
+    }
+}
+
+static void TryLaunchLauncher(UpdateJob job, bool updateFailed)
+{
+    if (string.IsNullOrWhiteSpace(job.LauncherExe) || !File.Exists(job.LauncherExe))
+    {
+        return;
+    }
+
+    try
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = job.LauncherExe,
+            WorkingDirectory = job.InstallRoot,
+            UseShellExecute = true
+        });
+    }
+    catch (Exception ex)
+    {
+        Console.Error.WriteLine(updateFailed
+            ? $"Update failed and launcher could not be restarted: {ex.Message}"
+            : $"Launcher could not be restarted: {ex.Message}");
+    }
 }
 
 static void TryDeleteDirectory(string path)

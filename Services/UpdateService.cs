@@ -111,6 +111,12 @@ public sealed class UpdateService : IDisposable
                 VerifyStagedFile(stagedPath, entry);
             }
 
+            if (GameProcessTracker.IsGameRunning())
+            {
+                Publish(UpdateSnapshot.UpdateFailed("Please close the game before applying the update.", manifest));
+                return;
+            }
+
             if (!File.Exists(LauncherConstants.UpdaterExePath))
             {
                 throw new FileNotFoundException(
