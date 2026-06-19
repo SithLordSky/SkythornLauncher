@@ -9,15 +9,26 @@ namespace SkythornLauncher;
 public partial class SettingsWindow : Window
 {
     private readonly LauncherProfile _profile;
+    private readonly UpdateService _updates;
 
     public LauncherProfile? ResultProfile { get; private set; }
 
-    public SettingsWindow(LauncherProfile profile)
+    public SettingsWindow(LauncherProfile profile, UpdateService updates)
     {
         InitializeComponent();
         SubWindowChrome.EnableDragMove(this);
         _profile = profile;
+        _updates = updates;
+        _updates.StatusUpdated += ApplyUpdateStatus;
+        Closed += (_, _) => _updates.StatusUpdated -= ApplyUpdateStatus;
         LoadFromProfile();
+        ApplyUpdateStatus(_updates.Latest);
+        Loaded += SettingsWindow_Loaded;
+    }
+
+    private async void SettingsWindow_Loaded(object sender, RoutedEventArgs e)
+    {
+        await _updates.RefreshAsync();
     }
 
     private void LoadFromProfile()
@@ -44,6 +55,47 @@ public partial class SettingsWindow : Window
         {
             DriverBox.SelectedIndex = 0;
         }
+    }
+
+    private void ApplyUpdateStatus(UpdateSnapshot snapshot)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            UpdateCurrentVersionText.Text = snapshot.CurrentVersion;
+            UpdateLatestVersionText.Text = string.IsNullOrWhiteSpace(snapshot.LatestVersion) ? "—" : snapshot.LatestVersion;
+            UpdateStatusText.Text = FormatUpdateStatus(snapshot);
+            CheckForUpdatesButton.IsEnabled = snapshot.State != UpdateCheckState.Checking;
+            InstallUpdateButton.IsEnabled = false;
+        });
+    }
+
+    private static string FormatUpdateStatus(UpdateSnapshot snapshot) =>
+        snapshot.State switch
+        {
+            UpdateCheckState.Checking => "Checking...",
+            UpdateCheckState.UpToDate => "Up to date",
+            UpdateCheckState.UpdateAvailable =>
+                snapshot.OutdatedFileCount > 0
+                    ? $"Update available ({snapshot.OutdatedFileCount} file(s) out of date)"
+                    : "Update available",
+            UpdateCheckState.CheckFailed => "Unable to check for updates",
+            _ => "—"
+        };
+
+    private async void CheckForUpdates_Click(object sender, RoutedEventArgs e)
+    {
+        CheckForUpdatesButton.IsEnabled = false;
+        await _updates.RefreshAsync();
+    }
+
+    private void InstallUpdate_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show(
+            this,
+            "Install Update is not available yet. This launcher can check for updates; file download and replacement will arrive in a future build.",
+            "Updates",
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
     }
 
     private void Browse_Click(object sender, RoutedEventArgs e)
@@ -108,6 +160,8 @@ public partial class SettingsWindow : Window
         DialogResult = false;
         Close();
     }
+
+    private void Minimize_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
 
     private void Close_Click(object sender, RoutedEventArgs e)
     {

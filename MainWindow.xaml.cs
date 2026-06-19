@@ -14,6 +14,7 @@ public partial class MainWindow : Window
     private readonly ProfileStore _profileStore = new();
     private readonly ServerStatusService _serverStatus = new();
     private readonly NewsService _news = new();
+    private readonly UpdateService _updates = new();
     private LauncherState _state = new();
     private bool _isLaunching;
     private Process? _gameProcess;
@@ -27,9 +28,11 @@ public partial class MainWindow : Window
             DetachGameProcessMonitor();
             _news.Dispose();
             _serverStatus.Dispose();
+            _updates.Dispose();
         };
         _serverStatus.StatusUpdated += ApplyServerStatus;
         _news.NewsUpdated += ApplyNews;
+        _updates.StatusUpdated += ApplyUpdateStatus;
         MouseLeftButtonDown += (_, e) =>
         {
             if (e.ButtonState == MouseButtonState.Pressed)
@@ -55,7 +58,8 @@ public partial class MainWindow : Window
             RefreshProfileDisplay(active);
             await Task.WhenAll(
                 _serverStatus.RefreshAsync(),
-                _news.RefreshAsync());
+                _news.RefreshAsync(),
+                _updates.RefreshAsync());
         }
         catch (Exception ex)
         {
@@ -142,6 +146,22 @@ public partial class MainWindow : Window
     private void ApplyNews(NewsSnapshot snapshot)
     {
         Dispatcher.Invoke(() => RenderNews(snapshot));
+    }
+
+    private void ApplyUpdateStatus(UpdateSnapshot snapshot)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            UpdateNoticeText.Visibility = snapshot.State == UpdateCheckState.UpdateAvailable
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+        });
+    }
+
+    private void UpdateNotice_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
+        OpenSettings();
     }
 
     private void RenderNews(NewsSnapshot snapshot)
@@ -277,10 +297,12 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Settings_Click(object sender, RoutedEventArgs e)
+    private void Settings_Click(object sender, RoutedEventArgs e) => OpenSettings();
+
+    private void OpenSettings()
     {
         var profile = FindActiveProfile();
-        var dialog = new SettingsWindow(profile)
+        var dialog = new SettingsWindow(profile, _updates)
         {
             Owner = this
         };
@@ -362,6 +384,8 @@ public partial class MainWindow : Window
             PlayButton.IsEnabled = true;
         }
     }
+
+    private void Minimize_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
 
     private void Close_Click(object sender, RoutedEventArgs e) => Close();
 }

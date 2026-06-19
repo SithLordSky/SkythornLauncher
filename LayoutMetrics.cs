@@ -76,6 +76,11 @@ public static class LayoutMetrics
     public const double ServerVersionValueLeft = 671;
     public const double ServerVersionValueTop = 568;
 
+    // Update notice — above launcher version line, no new menu art
+    public const double UpdateNoticeLeft = 137;
+    public const double UpdateNoticeTop = 548;
+    public const double UpdateNoticeWidth = 420;
+
     public const double RedPanelValueWidth = 230;
     public const double StatsValueWidth = 150;
     public const double NewsValueWidth = 340;

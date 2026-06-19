@@ -61,4 +61,46 @@ foreach ($path in $cleanPaths) {
 
 Get-ChildItem $root -Filter "*.pdb" -File -ErrorAction SilentlyContinue | Remove-Item -Force
 
+# Generate update-manifest.json for GitHub Release upload (Phase 1 updater).
+$manifestPathsFile = Join-Path $root "update-manifest-paths.txt"
+$releaseDir = Join-Path $root ".release"
+if (-not (Test-Path $releaseDir)) {
+    New-Item -ItemType Directory -Path $releaseDir -Force | Out-Null
+}
+
+$verCs = Get-Content (Join-Path $root "LauncherVersionInfo.cs") -Raw
+$major = if ($verCs -match 'Major\s*=\s*(\d+)') { [int]$matches[1] } else { throw "Could not read Major from LauncherVersionInfo.cs" }
+$minor = if ($verCs -match 'Minor\s*=\s*(\d+)') { [int]$matches[1] } else { throw "Could not read Minor from LauncherVersionInfo.cs" }
+$patch = if ($verCs -match 'Patch\s*=\s*(\d+)') { [int]$matches[1] } else { throw "Could not read Patch from LauncherVersionInfo.cs" }
+$displayVersion = "$major.$minor.$patch"
+$releaseTag = "v$displayVersion"
+
+$manifestEntries = @()
+foreach ($rel in (Get-Content $manifestPathsFile | Where-Object { $_ -and -not $_.StartsWith('#') })) {
+    $rel = $rel.Trim()
+    $full = Join-Path $root $rel
+    if (-not (Test-Path $full)) {
+        throw "Missing manifest file: $rel"
+    }
+
+    $item = Get-Item $full
+    $hash = (Get-FileHash $full -Algorithm SHA256).Hash.ToLowerInvariant()
+    $manifestEntries += [ordered]@{
+        path   = ($rel -replace '\\', '/')
+        size   = $item.Length
+        sha256 = $hash
+    }
+}
+
+$manifest = [ordered]@{
+    version      = $displayVersion
+    releaseTag   = $releaseTag
+    publishedUtc = (Get-Date).ToUniversalTime().ToString('o')
+    files        = $manifestEntries
+}
+
+$manifestPath = Join-Path $releaseDir "update-manifest.json"
+$manifest | ConvertTo-Json -Depth 5 | Set-Content -Path $manifestPath -Encoding UTF8
+Write-Host "Wrote $manifestPath ($($manifestEntries.Count) files) for GitHub Release $releaseTag"
+
 Write-Host "Published SkythornLauncher.exe to $root (player build only)"
