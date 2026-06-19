@@ -31,6 +31,13 @@ internal static class LauncherConstants
     /// <summary>Public website opened when news cannot be loaded or the user clicks fallback text.</summary>
     public const string WebsiteUrl = "https://xsithlordskyx.wixsite.com/lord-skythorn";
 
+    public const string GitHubOwner = "SithLordSky";
+    public const string GitHubRepo = "SkythornLauncher";
+
+    /// <summary>Latest GitHub Release (test builds are cut from private-test-fixes only).</summary>
+    public const string GitHubLatestReleaseApiUrl =
+        "https://api.github.com/repos/SithLordSky/SkythornLauncher/releases/latest";
+
     public static string LauncherVersion => LauncherVersionInfo.Display;
 
     /// <summary>

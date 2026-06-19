@@ -121,6 +121,19 @@
                        Width="{x:Static local:LayoutMetrics.StatsValueWidth}"
                        Text="—"/>
 
+            <TextBlock x:Name="UpdateNoticeText"
+                       Style="{StaticResource DynamicValueText}"
+                       Canvas.Left="{x:Static local:LayoutMetrics.UpdateNoticeLeft}"
+                       Canvas.Top="{x:Static local:LayoutMetrics.UpdateNoticeTop}"
+                       Width="{x:Static local:LayoutMetrics.UpdateNoticeWidth}"
+                       FontSize="13"
+                       Foreground="#F7E8A8"
+                       TextWrapping="Wrap"
+                       Visibility="Collapsed"
+                       Cursor="Hand"
+                       Text="Update Available — Please go to Settings to update."
+                       MouseLeftButtonDown="UpdateNotice_Click"/>
+
             <TextBlock x:Name="LauncherVersionValueText"
                        Style="{StaticResource DynamicValueText}"
                        Canvas.Left="{x:Static local:LayoutMetrics.LauncherVersionValueLeft}"
