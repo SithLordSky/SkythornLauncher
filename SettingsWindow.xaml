@@ -73,7 +73,6 @@
                                 Height="28"
                                 IsEnabled="False"
                                 Style="{StaticResource SubWindowSecondaryButton}"
-                                ToolTip="File installation will be available in a future launcher update."
                                 Click="InstallUpdate_Click"/>
                     </StackPanel>
 

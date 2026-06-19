@@ -64,13 +64,23 @@ public partial class SettingsWindow : Window
             UpdateCurrentVersionText.Text = snapshot.CurrentVersion;
             UpdateLatestVersionText.Text = string.IsNullOrWhiteSpace(snapshot.LatestVersion) ? "—" : snapshot.LatestVersion;
             UpdateStatusText.Text = FormatUpdateStatus(snapshot);
-            CheckForUpdatesButton.IsEnabled = snapshot.State != UpdateCheckState.Checking;
-            InstallUpdateButton.IsEnabled = false;
+            CheckForUpdatesButton.IsEnabled = !snapshot.IsBusy;
+            InstallUpdateButton.IsEnabled =
+                snapshot.State == UpdateCheckState.UpdateAvailable &&
+                !snapshot.IsBusy &&
+                !GameProcessTracker.IsGameRunning();
         });
     }
 
-    private static string FormatUpdateStatus(UpdateSnapshot snapshot) =>
-        snapshot.State switch
+    private static string FormatUpdateStatus(UpdateSnapshot snapshot)
+    {
+        if (snapshot.State == UpdateCheckState.UpdateAvailable &&
+            GameProcessTracker.IsGameRunning())
+        {
+            return "Update available — please close the game before updating.";
+        }
+
+        var baseText = snapshot.State switch
         {
             UpdateCheckState.Checking => "Checking...",
             UpdateCheckState.UpToDate => "Up to date",
@@ -79,8 +89,21 @@ public partial class SettingsWindow : Window
                     ? $"Update available ({snapshot.OutdatedFileCount} file(s) out of date)"
                     : "Update available",
             UpdateCheckState.CheckFailed => "Unable to check for updates",
+            UpdateCheckState.Downloading => "Downloading...",
+            UpdateCheckState.Verifying => "Verifying...",
+            UpdateCheckState.RestartingLauncher => "Restarting launcher...",
+            UpdateCheckState.UpdateFailed => "Update failed",
             _ => "—"
         };
+
+        if (!string.IsNullOrWhiteSpace(snapshot.ErrorMessage) &&
+            snapshot.State is UpdateCheckState.CheckFailed or UpdateCheckState.UpdateFailed)
+        {
+            return $"{baseText}: {snapshot.ErrorMessage}";
+        }
+
+        return baseText;
+    }
 
     private async void CheckForUpdates_Click(object sender, RoutedEventArgs e)
     {
@@ -88,14 +111,33 @@ public partial class SettingsWindow : Window
         await _updates.RefreshAsync();
     }
 
-    private void InstallUpdate_Click(object sender, RoutedEventArgs e)
+    private async void InstallUpdate_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show(
-            this,
-            "Install Update is not available yet. This launcher can check for updates; file download and replacement will arrive in a future build.",
-            "Updates",
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+        if (GameProcessTracker.IsGameRunning())
+        {
+            MessageBox.Show(
+                this,
+                "Please close the game before updating.",
+                "Updates",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+            return;
+        }
+
+        InstallUpdateButton.IsEnabled = false;
+        CheckForUpdatesButton.IsEnabled = false;
+        await _updates.InstallUpdateAsync();
+
+        if (_updates.Latest.State == UpdateCheckState.UpdateFailed &&
+            !string.IsNullOrWhiteSpace(_updates.Latest.ErrorMessage))
+        {
+            MessageBox.Show(
+                this,
+                _updates.Latest.ErrorMessage,
+                "Update Failed",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+        }
     }
 
     private void Browse_Click(object sender, RoutedEventArgs e)

@@ -12,6 +12,8 @@ if (Test-Path $stage) {
 
 dotnet publish (Join-Path $root "SkythornLauncher.csproj") -c Release -r win-x64 -o $stage
 
+dotnet publish (Join-Path $root "SkythornUpdater\SkythornUpdater.csproj") -c Release -r win-x64 -o $stage
+
 Get-ChildItem $stage -File | ForEach-Object { Copy-Item $_.FullName $root -Force }
 
 # Copy Assets except user-owned menu backgrounds (never overwrite those during publish).
@@ -76,6 +78,12 @@ $displayVersion = "$major.$minor.$patch"
 $releaseTag = "v$displayVersion"
 
 $manifestEntries = @()
+$releaseAssetsDir = Join-Path $releaseDir "assets"
+if (Test-Path $releaseAssetsDir) {
+    Remove-Item $releaseAssetsDir -Recurse -Force
+}
+New-Item -ItemType Directory -Path $releaseAssetsDir -Force | Out-Null
+
 foreach ($rel in (Get-Content $manifestPathsFile | Where-Object { $_ -and -not $_.StartsWith('#') })) {
     $rel = $rel.Trim()
     $full = Join-Path $root $rel
@@ -83,12 +91,16 @@ foreach ($rel in (Get-Content $manifestPathsFile | Where-Object { $_ -and -not $
         throw "Missing manifest file: $rel"
     }
 
+    $normalizedPath = ($rel -replace '\\', '/')
+    $assetName = $normalizedPath -replace '/', '__'
     $item = Get-Item $full
     $hash = (Get-FileHash $full -Algorithm SHA256).Hash.ToLowerInvariant()
+    Copy-Item $full (Join-Path $releaseAssetsDir $assetName) -Force
     $manifestEntries += [ordered]@{
-        path   = ($rel -replace '\\', '/')
-        size   = $item.Length
-        sha256 = $hash
+        path      = $normalizedPath
+        assetName = $assetName
+        size      = $item.Length
+        sha256    = $hash
     }
 }
 
@@ -102,5 +114,6 @@ $manifest = [ordered]@{
 $manifestPath = Join-Path $releaseDir "update-manifest.json"
 $manifest | ConvertTo-Json -Depth 5 | Set-Content -Path $manifestPath -Encoding UTF8
 Write-Host "Wrote $manifestPath ($($manifestEntries.Count) files) for GitHub Release $releaseTag"
+Write-Host "Release assets folder: $releaseAssetsDir (upload manifest + assets to GitHub Release)"
 
 Write-Host "Published SkythornLauncher.exe to $root (player build only)"
