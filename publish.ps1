@@ -107,9 +107,8 @@ foreach ($rel in (Get-Content $manifestPathsFile | Where-Object { $_ -and -not $
 $releaseNotes = @"
 Skythorn Launcher v$displayVersion
 
-- Repositioned the update-available notice to the top banner (centered above the status panel).
-- Fixed updater self-update so remaining files apply after SkythornUpdater.exe updates.
-- Launcher UI and updater reliability improvements for public update testing.
+- Launcher plays Create1 from the profile UO Music/4MB folder at 40% volume while idle.
+- Music stops when Play launches the game and resumes when the client exits.
 "@.Trim()
 
 $manifest = [ordered]@{
