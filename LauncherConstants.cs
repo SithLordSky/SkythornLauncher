@@ -38,6 +38,13 @@ internal static class LauncherConstants
     public const string GitHubLatestReleaseApiUrl =
         "https://api.github.com/repos/SithLordSky/SkythornLauncher/releases/latest";
 
+    /// <summary>Relative to the profile UO folder (e.g. Music/4MB).</summary>
+    public const string LauncherMusicSubfolder = @"Music\4MB";
+
+    public const string LauncherMusicBaseName = "Create1";
+
+    public const float LauncherMusicVolume = 0.40f;
+
     public static string LauncherVersion => LauncherVersionInfo.Display;
 
     /// <summary>
