@@ -7,7 +7,7 @@
   "targets": {
     ".NETCoreApp,Version=v10.0": {},
     ".NETCoreApp,Version=v10.0/win-x64": {
-      "SkythornLauncher/0.9.9": {
+      "SkythornLauncher/0.9.10": {
         "runtime": {
           "SkythornLauncher.dll": {}
         }
@@ -15,7 +15,7 @@
     }
   },
   "libraries": {
-    "SkythornLauncher/0.9.9": {
+    "SkythornLauncher/0.9.10": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

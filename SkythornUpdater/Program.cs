@@ -35,7 +35,7 @@ try
 {
     WaitForProcessExit(job.WaitPid);
 
-    foreach (var file in job.Files)
+    foreach (var file in OrderFilesForApply(job.Files))
     {
         ApplyFile(job, file);
     }
@@ -121,7 +121,37 @@ static void ApplyFile(UpdateJob job, UpdateJobFile file)
         File.Copy(targetPath, backupPath, overwrite: true);
     }
 
-    File.Copy(file.Source, targetPath, overwrite: true);
+    ApplyFileWithSelfUpdateFallback(job, file, targetPath);
+}
+
+static IReadOnlyList<UpdateJobFile> OrderFilesForApply(IReadOnlyList<UpdateJobFile> files)
+{
+    return files
+        .OrderBy(file => IsSelfUpdaterPath(file.Path) ? 1 : 0)
+        .ThenBy(file => file.Path, StringComparer.OrdinalIgnoreCase)
+        .ToList();
+}
+
+static bool IsSelfUpdaterPath(string path)
+{
+    var normalized = path.Replace('\\', '/');
+    return normalized.Equals("SkythornUpdater.exe", StringComparison.OrdinalIgnoreCase)
+        || normalized.Equals("SkythornUpdater.dll", StringComparison.OrdinalIgnoreCase)
+        || normalized.Equals("SkythornUpdater.deps.json", StringComparison.OrdinalIgnoreCase)
+        || normalized.Equals("SkythornUpdater.runtimeconfig.json", StringComparison.OrdinalIgnoreCase);
+}
+
+static void ApplyFileWithSelfUpdateFallback(UpdateJob job, UpdateJobFile file, string targetPath)
+{
+    if (!IsSelfUpdaterPath(file.Path))
+    {
+        File.Copy(file.Source, targetPath, overwrite: true);
+        return;
+    }
+
+    var pendingPath = targetPath + ".new";
+    File.Copy(file.Source, pendingPath, overwrite: true);
+    File.Move(pendingPath, targetPath, overwrite: true);
 }
 
 static bool IsPathWithinInstallRoot(string installRoot, string relativePath, out string targetPath)

@@ -108,6 +108,7 @@ $releaseNotes = @"
 Skythorn Launcher v$displayVersion
 
 - Repositioned the update-available notice to the top banner (centered above the status panel).
+- Fixed updater self-update so remaining files apply after SkythornUpdater.exe updates.
 - Launcher UI and updater reliability improvements for public update testing.
 "@.Trim()
 

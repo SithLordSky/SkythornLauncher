@@ -158,9 +158,11 @@ public sealed class UpdateService : IDisposable
 
             Publish(UpdateSnapshot.Progress(UpdateCheckState.RestartingLauncher, manifest));
 
+            var stagedUpdaterExe = PrepareUpdaterLaunchBundle(stagingDir, outdated);
+
             Process.Start(new ProcessStartInfo
             {
-                FileName = LauncherConstants.UpdaterExePath,
+                FileName = stagedUpdaterExe,
                 Arguments = $"--job \"{jobPath}\"",
                 WorkingDirectory = LauncherConstants.InstallRoot,
                 UseShellExecute = false
@@ -244,6 +246,64 @@ public sealed class UpdateService : IDisposable
             throw new InvalidOperationException($"Downloaded file hash mismatch for {entry.Path}.");
         }
     }
+
+    private static string PrepareUpdaterLaunchBundle(
+        string stagingDir,
+        IReadOnlyList<UpdateManifestFile> outdatedEntries)
+    {
+        var installRoot = LauncherConstants.InstallRoot;
+        var runDir = Path.Combine(stagingDir, "_updater_run");
+        Directory.CreateDirectory(runDir);
+
+        var outdatedPaths = outdatedEntries
+            .Select(entry => entry.Path.Replace('\\', '/'))
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var relativePath in UpdaterLaunchFiles)
+        {
+            var normalizedPath = relativePath.Replace('\\', '/');
+            var fileName = Path.GetFileName(relativePath);
+            var stagedDownload = Path.Combine(stagingDir, UpdateAssetNaming.ToAssetName(normalizedPath));
+            var installedPath = Path.Combine(installRoot, relativePath);
+            var launchPath = Path.Combine(runDir, fileName);
+
+            if (File.Exists(stagedDownload))
+            {
+                File.Copy(stagedDownload, launchPath, overwrite: true);
+                continue;
+            }
+
+            if (outdatedPaths.Contains(normalizedPath))
+            {
+                throw new FileNotFoundException(
+                    $"Downloaded updater file is missing from staging: {normalizedPath}",
+                    stagedDownload);
+            }
+
+            if (File.Exists(installedPath))
+            {
+                File.Copy(installedPath, launchPath, overwrite: true);
+            }
+        }
+
+        var stagedUpdaterExe = Path.Combine(runDir, "SkythornUpdater.exe");
+        if (!File.Exists(stagedUpdaterExe))
+        {
+            throw new FileNotFoundException(
+                "Staged updater executable was not prepared.",
+                stagedUpdaterExe);
+        }
+
+        return stagedUpdaterExe;
+    }
+
+    private static readonly string[] UpdaterLaunchFiles =
+    {
+        "SkythornUpdater.exe",
+        "SkythornUpdater.dll",
+        "SkythornUpdater.deps.json",
+        "SkythornUpdater.runtimeconfig.json"
+    };
 
     private static List<UpdateManifestFile> GetOutdatedFiles(UpdateManifest manifest)
     {

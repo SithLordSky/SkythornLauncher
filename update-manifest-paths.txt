@@ -3,6 +3,7 @@
 SkythornLauncher.exe
 SkythornLauncher.dll
 SkythornUpdater.exe
+SkythornUpdater.dll
 SkythornUpdater.deps.json
 SkythornUpdater.runtimeconfig.json
 SkythornLauncher.deps.json
