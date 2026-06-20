@@ -104,15 +104,24 @@ foreach ($rel in (Get-Content $manifestPathsFile | Where-Object { $_ -and -not $
     }
 }
 
+$releaseNotes = @"
+Skythorn Launcher v$displayVersion
+
+- Repositioned the update-available notice to the top banner (centered above the status panel).
+- Launcher UI and updater reliability improvements for public update testing.
+"@.Trim()
+
 $manifest = [ordered]@{
     version      = $displayVersion
     releaseTag   = $releaseTag
     publishedUtc = (Get-Date).ToUniversalTime().ToString('o')
+    releaseNotes = $releaseNotes
     files        = $manifestEntries
 }
 
 $manifestPath = Join-Path $releaseDir "update-manifest.json"
 $manifest | ConvertTo-Json -Depth 5 | Set-Content -Path $manifestPath -Encoding UTF8
+Copy-Item $manifestPath (Join-Path $releaseAssetsDir "update-manifest.json") -Force
 Write-Host "Wrote $manifestPath ($($manifestEntries.Count) files) for GitHub Release $releaseTag"
 Write-Host "Release assets folder: $releaseAssetsDir (upload manifest + assets to GitHub Release)"
 

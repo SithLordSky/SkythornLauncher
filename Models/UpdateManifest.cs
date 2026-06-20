@@ -13,6 +13,9 @@ public sealed class UpdateManifest
     [JsonPropertyName("publishedUtc")]
     public string PublishedUtc { get; init; } = string.Empty;
 
+    [JsonPropertyName("releaseNotes")]
+    public string ReleaseNotes { get; init; } = string.Empty;
+
     [JsonPropertyName("files")]
     public IReadOnlyList<UpdateManifestFile> Files { get; init; } = Array.Empty<UpdateManifestFile>();
 }
