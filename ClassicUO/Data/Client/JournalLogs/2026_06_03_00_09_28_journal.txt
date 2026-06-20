@@ -1,7 +1,0 @@
-[06/03/2026 00:09:28]  System: WorldMap loading...
-[06/03/2026 00:09:28]  System: Loading WorldMap markers..
-[06/03/2026 00:09:28]  System: WorldMap markers loaded (0)
-[06/03/2026 00:09:28]  System: Welcome, Scarlett! There are currently 2 users online, with 95672 items and 1511 mobiles in the world.
-[06/03/2026 00:09:28]  System: Welcome back to Britannia, Adventurer!
-[06/03/2026 00:09:28]  Scarlett: Scarlett
-[06/03/2026 00:09:29]  System: WorldMap loaded!

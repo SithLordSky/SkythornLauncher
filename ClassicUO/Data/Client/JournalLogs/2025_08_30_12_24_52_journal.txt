@@ -1,7 +1,0 @@
-[08/30/2025 12:24:52]  System: Welcome, Smith! There is currently 1 user online, with 95672 items and 1511 mobiles in the world.
-[08/30/2025 12:24:52]  System: Welcome back to Britannia, Adventurer!
-[08/30/2025 12:24:52]  Smith: Smith
-[08/30/2025 12:24:52]  Donata: Donata the innkeeper
-[08/30/2025 12:24:52]  a raven: a raven
-[08/30/2025 12:24:56]  System: You must be near an anvil and a forge to smith items.
-[08/30/2025 12:25:00]  System: You must be near an anvil and a forge to smith items.

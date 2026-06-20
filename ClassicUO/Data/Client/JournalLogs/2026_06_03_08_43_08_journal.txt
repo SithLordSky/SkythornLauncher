@@ -1,6 +1,0 @@
-[06/03/2026 08:43:07]  System: Welcome, Smithy! There is currently 1 user online, with 95723 items and 1475 mobiles in the world.
-[06/03/2026 08:43:08]  System: Welcome back to Britannia, Adventurer!
-[06/03/2026 08:43:08]  Smithy: Smithy
-[06/03/2026 08:43:08]  Donata: Donata the innkeeper
-[06/03/2026 08:43:11]  System: Welcome to this shard.
-[06/03/2026 08:43:21]  System: Please enjoy your stay.

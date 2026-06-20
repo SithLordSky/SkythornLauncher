@@ -1,7 +1,0 @@
-[08/28/2025 20:41:34]  System: Welcome, Smith! There are currently 2 users online, with 95677 items and 1511 mobiles in the world.
-[08/28/2025 20:41:34]  System: Welcome back to Britannia, Adventurer!
-[08/28/2025 20:41:34]  Smith: Smith
-[08/28/2025 20:41:34]  Donata: Donata the innkeeper
-[08/28/2025 20:41:34]  a raven: a raven
-[08/28/2025 20:41:34]  Skythorn: Skythorn
-[08/28/2025 20:41:36]  System: You must wait to perform another action.

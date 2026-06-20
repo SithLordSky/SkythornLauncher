@@ -9,7 +9,24 @@ obj/
 
 # Runtime logs
 ClassicUO/Logs/
+Client/Logs/
 *.log
+
+# ClassicUO runtime / user data
+ClassicUO/settings.json
+ClassicUO/Data/Profiles/
+ClassicUO/Data/**/JournalLogs/
+ClassicUO/Data/**/MapsCache/
+ClassicUO/Data/Client/userMarkers.usr
+ClassicUO/Data/Client/seasons.txt
+
+# Client-side runtime mirrors
+Client/Data/Profiles/
+Client/Data/**/JournalLogs/
+Client/Data/**/MapsCache/
+
+# IDE
+.cursor/
 
 # OS / IDE
 .DS_Store

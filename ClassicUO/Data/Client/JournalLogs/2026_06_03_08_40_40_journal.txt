@@ -1,7 +1,0 @@
-[06/03/2026 08:40:40]  System: Welcome, Mage! There is currently 1 user online, with 95710 items and 1513 mobiles in the world.
-[06/03/2026 08:40:40]  System: Welcome back to Britannia, Adventurer!
-[06/03/2026 08:40:40]  Mage: Mage
-[06/03/2026 08:40:40]  Donata: Donata the innkeeper
-[06/03/2026 08:40:40]  a cat: a cat
-[06/03/2026 08:40:44]  System: Welcome to this shard.
-[06/03/2026 08:40:54]  System: Please enjoy your stay.
