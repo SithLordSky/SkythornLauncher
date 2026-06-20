@@ -1,5 +1,7 @@
 namespace SkythornLauncher;
 
+using System.Windows;
+
 public static class LayoutMetrics
 {
     public const double WindowWidth = 800;
@@ -76,10 +78,10 @@ public static class LayoutMetrics
     public const double ServerVersionValueLeft = 671;
     public const double ServerVersionValueTop = 568;
 
-    // Update notice — above launcher version line, no new menu art
-    public const double UpdateNoticeLeft = 137;
-    public const double UpdateNoticeTop = 548;
-    public const double UpdateNoticeWidth = 420;
+    // Update notice — top banner band on the root grid, above the red status panel art
+    public const double UpdateNoticeTopMargin = 52;
+    public const double UpdateNoticeFontSize = DynamicFontSize + 2;
+    public static Thickness UpdateNoticeMargin => new(0, UpdateNoticeTopMargin, 0, 0);
 
     public const double RedPanelValueWidth = 230;
     public const double StatsValueWidth = 150;
