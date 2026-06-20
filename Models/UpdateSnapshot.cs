@@ -9,6 +9,7 @@ public sealed class UpdateSnapshot
     public string? LatestVersion { get; init; }
     public string? ReleaseTag { get; init; }
     public int OutdatedFileCount { get; init; }
+    public IReadOnlyList<string> OutdatedPaths { get; init; } = Array.Empty<string>();
     public DateTime? CheckedUtc { get; init; }
     public string? ErrorMessage { get; init; }
 
@@ -19,16 +20,22 @@ public sealed class UpdateSnapshot
             LatestVersion = manifest.Version,
             ReleaseTag = manifest.ReleaseTag,
             OutdatedFileCount = 0,
+            OutdatedPaths = Array.Empty<string>(),
             CheckedUtc = checkedUtc
         };
 
-    public static UpdateSnapshot UpdateAvailable(UpdateManifest manifest, int outdatedCount, DateTime checkedUtc, bool gameRunning) =>
+    public static UpdateSnapshot UpdateAvailable(
+        UpdateManifest manifest,
+        IReadOnlyList<string> outdatedPaths,
+        DateTime checkedUtc,
+        bool gameRunning) =>
         new()
         {
             State = UpdateCheckState.UpdateAvailable,
             LatestVersion = manifest.Version,
             ReleaseTag = manifest.ReleaseTag,
-            OutdatedFileCount = outdatedCount,
+            OutdatedFileCount = outdatedPaths.Count,
+            OutdatedPaths = outdatedPaths,
             CheckedUtc = checkedUtc,
             ErrorMessage = gameRunning ? "Please close the game before updating." : null
         };

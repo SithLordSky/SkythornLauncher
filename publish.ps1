@@ -116,4 +116,14 @@ $manifest | ConvertTo-Json -Depth 5 | Set-Content -Path $manifestPath -Encoding 
 Write-Host "Wrote $manifestPath ($($manifestEntries.Count) files) for GitHub Release $releaseTag"
 Write-Host "Release assets folder: $releaseAssetsDir (upload manifest + assets to GitHub Release)"
 
+# Verify install root matches the manifest we just generated (prevents git/release drift).
+$verifyScript = Join-Path $root "verify-install-against-manifest.ps1"
+if (Test-Path $verifyScript) {
+    & $verifyScript -ManifestPath $manifestPath -InstallRoot $root
+    if ($LASTEXITCODE -ne 0) {
+        throw "Install verification failed. Do not upload this release until local files match the manifest."
+    }
+}
+
 Write-Host "Published SkythornLauncher.exe to $root (player build only)"
+Write-Host "IMPORTANT: Commit the published binaries to git before uploading GitHub Release $releaseTag, or git clones will always show an update."

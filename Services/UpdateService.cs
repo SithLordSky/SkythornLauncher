@@ -44,8 +44,16 @@ public sealed class UpdateService : IDisposable
             }
 
             var outdated = GetOutdatedFiles(release.Manifest);
-            Publish(outdated.Count > 0
-                ? UpdateSnapshot.UpdateAvailable(release.Manifest, outdated.Count, checkedUtc, GameProcessTracker.IsGameRunning())
+            var outdatedPaths = outdated
+                .Select(entry => entry.Path.Replace('\\', '/'))
+                .Where(path => !string.IsNullOrWhiteSpace(path))
+                .ToList();
+            Publish(outdatedPaths.Count > 0
+                ? UpdateSnapshot.UpdateAvailable(
+                    release.Manifest,
+                    outdatedPaths,
+                    checkedUtc,
+                    GameProcessTracker.IsGameRunning())
                 : UpdateSnapshot.UpToDate(release.Manifest, checkedUtc));
         }
         catch (Exception ex)

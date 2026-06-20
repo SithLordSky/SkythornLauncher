@@ -102,6 +102,18 @@ public partial class SettingsWindow : Window
             return $"{baseText}: {snapshot.ErrorMessage}";
         }
 
+        if (snapshot.State == UpdateCheckState.UpdateAvailable &&
+            snapshot.OutdatedPaths.Count > 0)
+        {
+            var listed = string.Join(", ", snapshot.OutdatedPaths.Take(4));
+            if (snapshot.OutdatedPaths.Count > 4)
+            {
+                listed += $", +{snapshot.OutdatedPaths.Count - 4} more";
+            }
+
+            return $"{baseText}: {listed}";
+        }
+
         return baseText;
     }
 
