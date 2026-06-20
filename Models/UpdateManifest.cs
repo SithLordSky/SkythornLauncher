@@ -27,4 +27,8 @@ public sealed class UpdateManifestFile
 
     [JsonPropertyName("sha256")]
     public string Sha256 { get; init; } = string.Empty;
+
+    /// <summary>Flat GitHub Release asset name. When omitted, derived as path with '/' replaced by '__'.</summary>
+    [JsonPropertyName("assetName")]
+    public string AssetName { get; init; } = string.Empty;
 }

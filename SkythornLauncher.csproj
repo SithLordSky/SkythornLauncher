@@ -16,6 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="SkythornUpdater/**" />
+    <None Remove="SkythornUpdater/**" />
+    <EmbeddedResource Remove="SkythornUpdater/**" />
+    <Page Remove="SkythornUpdater/**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Assets\app.ico" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\home-background.png" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\profiles-background.png" CopyToOutputDirectory="PreserveNewest" />

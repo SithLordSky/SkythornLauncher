@@ -10,6 +10,7 @@ public sealed class UpdateSnapshot
     public string? ReleaseTag { get; init; }
     public int OutdatedFileCount { get; init; }
     public DateTime? CheckedUtc { get; init; }
+    public string? ErrorMessage { get; init; }
 
     public static UpdateSnapshot UpToDate(UpdateManifest manifest, DateTime checkedUtc) =>
         new()
@@ -21,22 +22,48 @@ public sealed class UpdateSnapshot
             CheckedUtc = checkedUtc
         };
 
-    public static UpdateSnapshot UpdateAvailable(UpdateManifest manifest, int outdatedCount, DateTime checkedUtc) =>
+    public static UpdateSnapshot UpdateAvailable(UpdateManifest manifest, int outdatedCount, DateTime checkedUtc, bool gameRunning) =>
         new()
         {
             State = UpdateCheckState.UpdateAvailable,
             LatestVersion = manifest.Version,
             ReleaseTag = manifest.ReleaseTag,
             OutdatedFileCount = outdatedCount,
-            CheckedUtc = checkedUtc
+            CheckedUtc = checkedUtc,
+            ErrorMessage = gameRunning ? "Please close the game before updating." : null
         };
 
-    public static UpdateSnapshot CheckFailed(DateTime checkedUtc) =>
+    public static UpdateSnapshot CheckFailed(DateTime checkedUtc, string? message = null) =>
         new()
         {
             State = UpdateCheckState.CheckFailed,
-            CheckedUtc = checkedUtc
+            CheckedUtc = checkedUtc,
+            ErrorMessage = message
         };
+
+    public static UpdateSnapshot Progress(UpdateCheckState state, UpdateManifest? manifest = null, string? errorMessage = null) =>
+        new()
+        {
+            State = state,
+            LatestVersion = manifest?.Version,
+            ReleaseTag = manifest?.ReleaseTag,
+            ErrorMessage = errorMessage
+        };
+
+    public static UpdateSnapshot UpdateFailed(string message, UpdateManifest? manifest = null) =>
+        new()
+        {
+            State = UpdateCheckState.UpdateFailed,
+            LatestVersion = manifest?.Version,
+            ReleaseTag = manifest?.ReleaseTag,
+            ErrorMessage = message
+        };
+
+    public bool IsBusy =>
+        State is UpdateCheckState.Checking
+            or UpdateCheckState.Downloading
+            or UpdateCheckState.Verifying
+            or UpdateCheckState.RestartingLauncher;
 }
 
 public enum UpdateCheckState
@@ -44,5 +71,9 @@ public enum UpdateCheckState
     Checking,
     UpToDate,
     UpdateAvailable,
-    CheckFailed
+    CheckFailed,
+    Downloading,
+    Verifying,
+    RestartingLauncher,
+    UpdateFailed
 }

@@ -73,6 +73,7 @@ public partial class MainWindow : Window
         DetachGameProcessMonitor();
 
         _gameProcess = process;
+        GameProcessTracker.Track(process);
         if (process.HasExited)
         {
             return;
@@ -85,11 +86,13 @@ public partial class MainWindow : Window
     {
         if (_gameProcess == null)
         {
+            GameProcessTracker.Clear();
             return;
         }
 
         _gameProcess.Exited -= OnGameProcessExited;
         _gameProcess = null;
+        GameProcessTracker.Clear();
     }
 
     private void OnGameProcessExited(object? sender, EventArgs e)

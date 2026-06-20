@@ -2,6 +2,9 @@
 # One path per line. Do not list user data (ClassicUO/settings.json, Client/Data/Profiles, etc.).
 SkythornLauncher.exe
 SkythornLauncher.dll
+SkythornUpdater.exe
+SkythornUpdater.deps.json
+SkythornUpdater.runtimeconfig.json
 SkythornLauncher.deps.json
 SkythornLauncher.runtimeconfig.json
 Client/cuo.dll

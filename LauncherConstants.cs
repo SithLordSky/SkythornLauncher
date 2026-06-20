@@ -67,6 +67,24 @@ internal static class LauncherConstants
     public static string LaunchLogPath =>
         Path.Combine(ClientDataDirectory, "Logs", "launcher-client.log");
 
+    public static string UpdateStagingRoot =>
+        Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            AppDataFolderName,
+            "update-staging");
+
+    public static string UpdateBackupRoot =>
+        Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            AppDataFolderName,
+            "update-backup");
+
+    public static string UpdaterExePath =>
+        Path.Combine(InstallRoot, "SkythornUpdater.exe");
+
+    public static string LauncherExePath =>
+        Path.Combine(InstallRoot, "SkythornLauncher.exe");
+
     private static string ResolveInstallRoot()
     {
         var dir = AppContext.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);

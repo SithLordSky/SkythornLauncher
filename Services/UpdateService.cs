@@ -1,8 +1,10 @@
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Windows;
 using SkythornLauncher.Models;
 
 namespace SkythornLauncher.Services;
@@ -13,7 +15,7 @@ public sealed class UpdateService : IDisposable
 
     private readonly HttpClient _http = new()
     {
-        Timeout = TimeSpan.FromSeconds(15)
+        Timeout = TimeSpan.FromMinutes(10)
     };
 
     public event Action<UpdateSnapshot>? StatusUpdated;
@@ -34,21 +36,133 @@ public sealed class UpdateService : IDisposable
 
         try
         {
-            var manifest = await FetchLatestManifestAsync(cancellationToken);
-            if (manifest == null || manifest.Files.Count == 0)
+            var release = await FetchLatestReleaseAsync(cancellationToken);
+            if (release?.Manifest == null || release.Manifest.Files.Count == 0)
             {
-                Publish(UpdateSnapshot.CheckFailed(checkedUtc));
+                Publish(UpdateSnapshot.CheckFailed(checkedUtc, "Update manifest was not found on the latest release."));
                 return;
             }
 
-            var outdatedCount = CountOutdatedFiles(manifest);
-            Publish(outdatedCount > 0
-                ? UpdateSnapshot.UpdateAvailable(manifest, outdatedCount, checkedUtc)
-                : UpdateSnapshot.UpToDate(manifest, checkedUtc));
+            var outdated = GetOutdatedFiles(release.Manifest);
+            Publish(outdated.Count > 0
+                ? UpdateSnapshot.UpdateAvailable(release.Manifest, outdated.Count, checkedUtc, GameProcessTracker.IsGameRunning())
+                : UpdateSnapshot.UpToDate(release.Manifest, checkedUtc));
         }
-        catch
+        catch (Exception ex)
         {
-            Publish(UpdateSnapshot.CheckFailed(checkedUtc));
+            Publish(UpdateSnapshot.CheckFailed(checkedUtc, ex.Message));
+        }
+    }
+
+    public async Task InstallUpdateAsync(CancellationToken cancellationToken = default)
+    {
+        UpdateManifest? manifest = null;
+
+        try
+        {
+            if (GameProcessTracker.IsGameRunning())
+            {
+                Publish(UpdateSnapshot.UpdateFailed("Please close the game before updating."));
+                return;
+            }
+
+            Publish(UpdateSnapshot.Progress(UpdateCheckState.Downloading));
+
+            var release = await FetchLatestReleaseAsync(cancellationToken);
+            manifest = release?.Manifest;
+            if (manifest == null || release?.Assets == null)
+            {
+                Publish(UpdateSnapshot.UpdateFailed("Update manifest was not found on the latest release.", manifest));
+                return;
+            }
+
+            var outdated = GetOutdatedFiles(manifest);
+            if (outdated.Count == 0)
+            {
+                Publish(UpdateSnapshot.UpToDate(manifest, DateTime.UtcNow));
+                return;
+            }
+
+            var stagingDir = Path.Combine(
+                LauncherConstants.UpdateStagingRoot,
+                DateTime.UtcNow.ToString("yyyyMMdd_HHmmss"));
+            Directory.CreateDirectory(stagingDir);
+
+            foreach (var entry in outdated)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var assetName = UpdateAssetNaming.ResolveAssetName(entry);
+                if (!release.Assets.TryGetValue(assetName, out var assetUrl))
+                {
+                    throw new InvalidOperationException($"Release asset not found: {assetName}");
+                }
+
+                var stagedPath = Path.Combine(stagingDir, assetName);
+                await DownloadFileAsync(assetUrl, stagedPath, cancellationToken);
+            }
+
+            Publish(UpdateSnapshot.Progress(UpdateCheckState.Verifying, manifest));
+
+            foreach (var entry in outdated)
+            {
+                var assetName = UpdateAssetNaming.ResolveAssetName(entry);
+                var stagedPath = Path.Combine(stagingDir, assetName);
+                VerifyStagedFile(stagedPath, entry);
+            }
+
+            if (GameProcessTracker.IsGameRunning())
+            {
+                Publish(UpdateSnapshot.UpdateFailed("Please close the game before applying the update.", manifest));
+                return;
+            }
+
+            if (!File.Exists(LauncherConstants.UpdaterExePath))
+            {
+                throw new FileNotFoundException(
+                    $"Updater helper is missing: {LauncherConstants.UpdaterExePath}");
+            }
+
+            var backupDir = Path.Combine(
+                LauncherConstants.UpdateBackupRoot,
+                DateTime.UtcNow.ToString("yyyyMMdd_HHmmss"));
+            Directory.CreateDirectory(backupDir);
+
+            var job = new UpdateJob
+            {
+                InstallRoot = LauncherConstants.InstallRoot,
+                LauncherExe = LauncherConstants.LauncherExePath,
+                WaitPid = Environment.ProcessId,
+                BackupDir = backupDir,
+                StagingDir = stagingDir,
+                Files = outdated.Select(entry => new UpdateJobFile
+                {
+                    Path = entry.Path.Replace('\\', '/'),
+                    Source = Path.Combine(stagingDir, UpdateAssetNaming.ResolveAssetName(entry))
+                }).ToList()
+            };
+
+            var jobPath = Path.Combine(stagingDir, "update-job.json");
+            await File.WriteAllTextAsync(
+                jobPath,
+                JsonSerializer.Serialize(job, JsonOptions),
+                cancellationToken);
+
+            Publish(UpdateSnapshot.Progress(UpdateCheckState.RestartingLauncher, manifest));
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = LauncherConstants.UpdaterExePath,
+                Arguments = $"--job \"{jobPath}\"",
+                WorkingDirectory = LauncherConstants.InstallRoot,
+                UseShellExecute = false
+            });
+
+            Application.Current.Shutdown();
+        }
+        catch (Exception ex)
+        {
+            Publish(UpdateSnapshot.UpdateFailed(ex.Message, manifest));
         }
     }
 
@@ -58,64 +172,139 @@ public sealed class UpdateService : IDisposable
         StatusUpdated?.Invoke(snapshot);
     }
 
-    private async Task<UpdateManifest?> FetchLatestManifestAsync(CancellationToken cancellationToken)
+    private async Task<ReleaseBundle?> FetchLatestReleaseAsync(CancellationToken cancellationToken)
     {
         using var releaseResponse = await _http.GetAsync(LauncherConstants.GitHubLatestReleaseApiUrl, cancellationToken);
         releaseResponse.EnsureSuccessStatusCode();
 
         await using var releaseStream = await releaseResponse.Content.ReadAsStreamAsync(cancellationToken);
         var release = await JsonSerializer.DeserializeAsync<GitHubReleaseResponse>(releaseStream, JsonOptions, cancellationToken);
-        var assetUrl = release?.Assets?
-            .FirstOrDefault(a => string.Equals(a.Name, ManifestAssetName, StringComparison.OrdinalIgnoreCase))
-            ?.BrowserDownloadUrl;
-
-        if (string.IsNullOrWhiteSpace(assetUrl))
+        if (release?.Assets == null)
         {
             return null;
         }
 
-        using var manifestResponse = await _http.GetAsync(assetUrl, cancellationToken);
+        var assets = release.Assets
+            .Where(a => !string.IsNullOrWhiteSpace(a.Name) && !string.IsNullOrWhiteSpace(a.BrowserDownloadUrl))
+            .GroupBy(a => a.Name!, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(g => g.Key, g => g.First().BrowserDownloadUrl!, StringComparer.OrdinalIgnoreCase);
+
+        if (!assets.TryGetValue(ManifestAssetName, out var manifestUrl))
+        {
+            return new ReleaseBundle(null, assets);
+        }
+
+        using var manifestResponse = await _http.GetAsync(manifestUrl, cancellationToken);
         manifestResponse.EnsureSuccessStatusCode();
 
         await using var manifestStream = await manifestResponse.Content.ReadAsStreamAsync(cancellationToken);
-        return await JsonSerializer.DeserializeAsync<UpdateManifest>(manifestStream, JsonOptions, cancellationToken);
+        var manifest = await JsonSerializer.DeserializeAsync<UpdateManifest>(manifestStream, JsonOptions, cancellationToken);
+        return new ReleaseBundle(manifest, assets);
     }
 
-    private static int CountOutdatedFiles(UpdateManifest manifest)
+    private async Task DownloadFileAsync(string url, string destinationPath, CancellationToken cancellationToken)
+    {
+        var directory = Path.GetDirectoryName(destinationPath);
+        if (!string.IsNullOrEmpty(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        using var response = await _http.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+        response.EnsureSuccessStatusCode();
+        await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+        await using var file = File.Create(destinationPath);
+        await stream.CopyToAsync(file, cancellationToken);
+    }
+
+    private static void VerifyStagedFile(string stagedPath, UpdateManifestFile entry)
+    {
+        if (!File.Exists(stagedPath))
+        {
+            throw new InvalidOperationException($"Downloaded file is missing: {entry.Path}");
+        }
+
+        var info = new FileInfo(stagedPath);
+        if (info.Length != entry.Size)
+        {
+            throw new InvalidOperationException($"Downloaded file size mismatch for {entry.Path}.");
+        }
+
+        var hash = ComputeSha256(stagedPath);
+        if (!string.Equals(hash, entry.Sha256, StringComparison.OrdinalIgnoreCase))
+        {
+            throw new InvalidOperationException($"Downloaded file hash mismatch for {entry.Path}.");
+        }
+    }
+
+    private static List<UpdateManifestFile> GetOutdatedFiles(UpdateManifest manifest)
     {
         var root = LauncherConstants.InstallRoot;
-        var outdated = 0;
+        var outdated = new List<UpdateManifestFile>();
 
         foreach (var entry in manifest.Files)
         {
             if (string.IsNullOrWhiteSpace(entry.Path))
             {
-                outdated++;
+                outdated.Add(entry);
+                continue;
+            }
+
+            if (!IsManifestPathAllowed(entry.Path))
+            {
                 continue;
             }
 
             var localPath = Path.Combine(root, entry.Path.Replace('/', Path.DirectorySeparatorChar));
             if (!File.Exists(localPath))
             {
-                outdated++;
+                outdated.Add(entry);
                 continue;
             }
 
             var info = new FileInfo(localPath);
             if (info.Length != entry.Size)
             {
-                outdated++;
+                outdated.Add(entry);
                 continue;
             }
 
             var hash = ComputeSha256(localPath);
             if (!string.Equals(hash, entry.Sha256, StringComparison.OrdinalIgnoreCase))
             {
-                outdated++;
+                outdated.Add(entry);
             }
         }
 
         return outdated;
+    }
+
+    internal static bool IsManifestPathAllowed(string manifestPath)
+    {
+        var normalized = manifestPath.Replace('\\', '/').Trim();
+        if (string.IsNullOrWhiteSpace(normalized) ||
+            normalized.Contains("..", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        if (normalized.StartsWith("ClassicUO/", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        if (normalized.StartsWith("Client/Data/", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        if (normalized.Equals("Assets/profiles-background.png", StringComparison.OrdinalIgnoreCase) ||
+            normalized.Equals("Assets/settings-background.png", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     private static string ComputeSha256(string path)
@@ -129,8 +318,11 @@ public sealed class UpdateService : IDisposable
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
-        PropertyNameCaseInsensitive = true
+        PropertyNameCaseInsensitive = true,
+        WriteIndented = true
     };
+
+    private sealed record ReleaseBundle(UpdateManifest? Manifest, IReadOnlyDictionary<string, string> Assets);
 
     private sealed class GitHubReleaseResponse
     {
