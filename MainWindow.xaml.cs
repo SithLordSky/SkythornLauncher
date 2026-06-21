@@ -26,6 +26,7 @@ public partial class MainWindow : Window
         Closed += (_, _) =>
         {
             DetachGameProcessMonitor();
+            LauncherMusicService.Instance.Dispose();
             _news.Dispose();
             _serverStatus.Dispose();
             _updates.Dispose();
@@ -56,6 +57,7 @@ public partial class MainWindow : Window
             }
 
             RefreshProfileDisplay(active);
+            LauncherMusicService.Instance.SyncWithProfile(active);
             await Task.WhenAll(
                 _serverStatus.RefreshAsync(),
                 _news.RefreshAsync(),
@@ -79,6 +81,7 @@ public partial class MainWindow : Window
             return;
         }
 
+        process.EnableRaisingEvents = true;
         process.Exited += OnGameProcessExited;
     }
 
@@ -97,7 +100,11 @@ public partial class MainWindow : Window
 
     private void OnGameProcessExited(object? sender, EventArgs e)
     {
-        Dispatcher.BeginInvoke(DetachGameProcessMonitor);
+        Dispatcher.BeginInvoke(() =>
+        {
+            DetachGameProcessMonitor();
+            LauncherMusicService.Instance.ResumeAfterGame();
+        });
     }
 
     private static bool IsEmptyPreferences(ClientPreferences prefs)
@@ -297,6 +304,7 @@ public partial class MainWindow : Window
             _state = dialog.ResultState;
             _profileStore.Save(_state);
             RefreshProfileDisplay(FindActiveProfile());
+            LauncherMusicService.Instance.SyncWithProfile(FindActiveProfile());
         }
     }
 
@@ -322,6 +330,7 @@ public partial class MainWindow : Window
             _profileStore.Save(_state);
             SettingsWriter.Write(dialog.ResultProfile);
             RefreshProfileDisplay(FindActiveProfile());
+            LauncherMusicService.Instance.SyncWithProfile(FindActiveProfile());
         }
     }
 
@@ -337,6 +346,7 @@ public partial class MainWindow : Window
             _isLaunching = true;
             PlayButton.IsEnabled = false;
             StatusValueText.Text = "Launching...";
+            LauncherMusicService.Instance.StopForGameLaunch();
 
             var profile = FindActiveProfile();
             profile.LastUsedUtc = DateTime.UtcNow;
@@ -363,10 +373,12 @@ public partial class MainWindow : Window
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning);
                 DetachGameProcessMonitor();
+                LauncherMusicService.Instance.ResumeAfterGame();
             }
             else if (result.Process.HasExited)
             {
                 DetachGameProcessMonitor();
+                LauncherMusicService.Instance.ResumeAfterGame();
             }
             else
             {
@@ -380,6 +392,7 @@ public partial class MainWindow : Window
         {
             MessageBox.Show(this, ex.Message, "Launch Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
             DetachGameProcessMonitor();
+            LauncherMusicService.Instance.ResumeAfterGame();
         }
         finally
         {
