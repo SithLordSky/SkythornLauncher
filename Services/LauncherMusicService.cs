@@ -4,7 +4,7 @@ using SkythornLauncher.Models;
 namespace SkythornLauncher.Services;
 
 /// <summary>
-/// Plays Create1 from the profile UO install while the launcher is idle.
+/// Plays Linelle from the profile UO install while the launcher is idle.
 /// Stops when Play launches the game; resumes when the game exits.
 /// </summary>
 internal sealed class LauncherMusicService : IDisposable

@@ -6,7 +6,7 @@ internal static class LauncherConstants
     public const string ServerIp = "195.88.56.169";
     public const ushort ServerPort = 2593;
     public const string ClientVersion = "3.0.8q";
-    public const string DefaultUltimaOnlinePath = @"C:\ProgramFiles\Ultima Online 2D";
+    public const string DefaultUltimaOnlinePath = @"C:\Ultima Online 2D";
 
     public const string AppDataFolderName = "LordSkythornsRevenge";
     public const string ProfilesFileName = "profiles.json";
@@ -38,10 +38,10 @@ internal static class LauncherConstants
     public const string GitHubLatestReleaseApiUrl =
         "https://api.github.com/repos/SithLordSky/SkythornLauncher/releases/latest";
 
-    /// <summary>Relative to the profile UO folder (e.g. Music/4MB).</summary>
-    public const string LauncherMusicSubfolder = @"Music\4MB";
+    /// <summary>Relative to the profile UO folder (e.g. Music).</summary>
+    public const string LauncherMusicSubfolder = @"Music";
 
-    public const string LauncherMusicBaseName = "Create1";
+    public const string LauncherMusicBaseName = "Linelle";
 
     public const float LauncherMusicVolume = 0.40f;
 
