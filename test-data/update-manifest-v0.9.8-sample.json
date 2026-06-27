@@ -1,0 +1,19 @@
+{
+    "version": "0.9.8",
+    "releaseTag": "v0.9.8",
+    "publishedUtc": "2026-06-20T05:22:25.9248751Z",
+    "files": [
+        {
+            "path": "SkythornLauncher.exe",
+            "assetName": "SkythornLauncher.exe",
+            "size": 535552,
+            "sha256": "136c33a966bdd85d1fd498ebc39ba6ac5f2b3a630546654d44c29150dd099ef6"
+        },
+        {
+            "path": "SkythornLauncher.dll",
+            "assetName": "SkythornLauncher.dll",
+            "size": 493568,
+            "sha256": "0f4638087f87d6b970c74844d9288f0e021b87a79f4d3bc1ae9e4a63d21063eb"
+        }
+    ]
+}

@@ -1,0 +1,148 @@
+<Window x:Class="SkythornLauncher.ProfileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:SkythornLauncher.Controls"
+        xmlns:local="clr-namespace:SkythornLauncher"
+        Title="Profiles"
+        Width="{x:Static local:LayoutMetrics.WindowWidth}"
+        Height="{x:Static local:LayoutMetrics.WindowHeight}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        FontFamily="{DynamicResource FantasyFont}">
+    <Grid Width="{x:Static local:LayoutMetrics.WindowWidth}"
+          Height="{x:Static local:LayoutMetrics.WindowHeight}">
+        <Image Source="pack://siteoforigin:,,,/Assets/profiles-background.png"
+               Stretch="Fill"
+               Width="{x:Static local:LayoutMetrics.WindowWidth}"
+               Height="{x:Static local:LayoutMetrics.WindowHeight}"
+               RenderOptions.BitmapScalingMode="HighQuality"/>
+
+        <Grid Margin="{x:Static local:SubWindowMetrics.ContentMargin}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ListBox x:Name="ProfileList"
+                     Style="{StaticResource SubWindowList}"
+                     SelectionChanged="ProfileList_SelectionChanged"/>
+
+            <StackPanel Grid.Row="1" Margin="0,12,0,52">
+                <TextBlock Text="Account Name" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                <TextBox x:Name="UsernameBox"
+                         Height="28"
+                         Margin="0,0,0,8"
+                         Style="{StaticResource SubWindowField}"/>
+
+                <TextBlock Text="Password" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                <PasswordBox x:Name="PasswordBox"
+                             Height="28"
+                             Margin="0,0,0,8"
+                             Style="{StaticResource SubWindowPassword}"/>
+
+                <CheckBox x:Name="SkipLoginScreenBox"
+                          Style="{StaticResource SubWindowCheckBox}"
+                          Content="Skip login and server selection"
+                          Margin="0,0,0,8"/>
+                <CheckBox x:Name="AutoLoginBox"
+                          Style="{StaticResource SubWindowCheckBox}"
+                          Content="Play as last character"
+                          Margin="0,0,0,8"/>
+                <CheckBox x:Name="SaveAccountBox"
+                          Style="{StaticResource SubWindowCheckBox}"
+                          Content="Save account credentials"/>
+            </StackPanel>
+        </Grid>
+
+        <Canvas Width="{x:Static local:LayoutMetrics.WindowWidth}"
+                Height="{x:Static local:LayoutMetrics.WindowHeight}">
+            <controls:MenuButton x:Name="NewButton"
+                                 Canvas.Left="{x:Static local:SubWindowLayoutMetrics.ProfilesNewButtonLeft}"
+                                 Canvas.Top="{x:Static local:SubWindowLayoutMetrics.ProfilesNewButtonTop}"
+                                 Width="{x:Static local:SubWindowLayoutMetrics.ProfilesNewButtonWidth}"
+                                 Height="{x:Static local:SubWindowLayoutMetrics.ProfilesNewButtonHeight}"
+                                 NormalTopOffset="0"
+                                 NormalHeight="{x:Static local:SubWindowLayoutMetrics.ProfilesNewButtonHeight}"
+                                 HoverLeftOffset="{x:Static local:SubWindowLayoutMetrics.ProfilesNewHoverLeftOffset}"
+                                 HoverTopOffset="{x:Static local:SubWindowLayoutMetrics.ProfilesNewHoverTopOffset}"
+                                 HoverWidth="{x:Static local:SubWindowLayoutMetrics.ProfilesNewHoverWidth}"
+                                 HoverHeight="{x:Static local:SubWindowLayoutMetrics.ProfilesNewHoverHeight}"
+                                 NormalImageSource="pack://siteoforigin:,,,/Assets/Menu/Profiles/new.png"
+                                 HoverImageSource="pack://siteoforigin:,,,/Assets/Menu/Profiles/new-hover.png"
+                                 Panel.ZIndex="{x:Static local:SubWindowLayoutMetrics.SubWindowButtonArtZIndex}"
+                                 Click="New_Click"/>
+            <controls:MenuButton x:Name="DeleteButton"
+                                 Canvas.Left="{x:Static local:SubWindowLayoutMetrics.ProfilesDeleteButtonLeft}"
+                                 Canvas.Top="{x:Static local:SubWindowLayoutMetrics.ProfilesDeleteButtonTop}"
+                                 Width="{x:Static local:SubWindowLayoutMetrics.ProfilesDeleteButtonWidth}"
+                                 Height="{x:Static local:SubWindowLayoutMetrics.ProfilesDeleteButtonHeight}"
+                                 NormalTopOffset="0"
+                                 NormalHeight="{x:Static local:SubWindowLayoutMetrics.ProfilesDeleteButtonHeight}"
+                                 HoverLeftOffset="{x:Static local:SubWindowLayoutMetrics.ProfilesDeleteHoverLeftOffset}"
+                                 HoverTopOffset="{x:Static local:SubWindowLayoutMetrics.ProfilesDeleteHoverTopOffset}"
+                                 HoverWidth="{x:Static local:SubWindowLayoutMetrics.ProfilesDeleteHoverWidth}"
+                                 HoverHeight="{x:Static local:SubWindowLayoutMetrics.ProfilesDeleteHoverHeight}"
+                                 NormalImageSource="pack://siteoforigin:,,,/Assets/Menu/Profiles/delete.png"
+                                 HoverImageSource="pack://siteoforigin:,,,/Assets/Menu/Profiles/delete-hover.png"
+                                 Panel.ZIndex="{x:Static local:SubWindowLayoutMetrics.SubWindowButtonArtZIndex}"
+                                 Click="Delete_Click"/>
+            <controls:MenuButton x:Name="CancelButton"
+                                 Canvas.Left="{x:Static local:SubWindowLayoutMetrics.CancelButtonLeft}"
+                                 Canvas.Top="{x:Static local:SubWindowLayoutMetrics.CancelButtonTop}"
+                                 Width="{x:Static local:SubWindowLayoutMetrics.CancelButtonWidth}"
+                                 Height="{x:Static local:SubWindowLayoutMetrics.CancelButtonHeight}"
+                                 NormalTopOffset="0"
+                                 NormalHeight="{x:Static local:SubWindowLayoutMetrics.CancelButtonHeight}"
+                                 HoverLeftOffset="{x:Static local:SubWindowLayoutMetrics.CancelHoverLeftOffset}"
+                                 HoverTopOffset="{x:Static local:SubWindowLayoutMetrics.CancelHoverTopOffset}"
+                                 HoverWidth="{x:Static local:SubWindowLayoutMetrics.CancelHoverWidth}"
+                                 HoverHeight="{x:Static local:SubWindowLayoutMetrics.CancelHoverHeight}"
+                                 NormalImageSource="pack://siteoforigin:,,,/Assets/Menu/Profiles/cancel.png"
+                                 HoverImageSource="pack://siteoforigin:,,,/Assets/Menu/Profiles/cancel-hover.png"
+                                 Panel.ZIndex="{x:Static local:SubWindowLayoutMetrics.SubWindowButtonArtZIndex}"
+                                 Click="Cancel_Click"/>
+            <controls:MenuButton x:Name="SaveButton"
+                                 Canvas.Left="{x:Static local:SubWindowLayoutMetrics.SaveButtonLeft}"
+                                 Canvas.Top="{x:Static local:SubWindowLayoutMetrics.SaveButtonTop}"
+                                 Width="{x:Static local:SubWindowLayoutMetrics.SaveButtonWidth}"
+                                 Height="{x:Static local:SubWindowLayoutMetrics.SaveButtonHeight}"
+                                 NormalTopOffset="0"
+                                 NormalHeight="{x:Static local:SubWindowLayoutMetrics.SaveButtonHeight}"
+                                 HoverLeftOffset="{x:Static local:SubWindowLayoutMetrics.SaveHoverLeftOffset}"
+                                 HoverTopOffset="{x:Static local:SubWindowLayoutMetrics.SaveHoverTopOffset}"
+                                 HoverWidth="{x:Static local:SubWindowLayoutMetrics.SaveHoverWidth}"
+                                 HoverHeight="{x:Static local:SubWindowLayoutMetrics.SaveHoverHeight}"
+                                 NormalImageSource="pack://siteoforigin:,,,/Assets/Menu/Profiles/save.png"
+                                 HoverImageSource="pack://siteoforigin:,,,/Assets/Menu/Profiles/save-hover.png"
+                                 Panel.ZIndex="{x:Static local:SubWindowLayoutMetrics.SubWindowButtonArtZIndex}"
+                                 Click="Save_Click"/>
+        </Canvas>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,6,8,0"
+                    Panel.ZIndex="20">
+            <Button Content="—"
+                    Width="26"
+                    Height="26"
+                    Margin="0,0,4,0"
+                    Background="#66000000"
+                    Foreground="#DDDDDD"
+                    BorderThickness="0"
+                    ToolTip="Minimize"
+                    Click="Minimize_Click"/>
+            <Button Content="✕"
+                    Width="26"
+                    Height="26"
+                    Background="#66000000"
+                    Foreground="#DDDDDD"
+                    BorderThickness="0"
+                    ToolTip="Close"
+                    Click="Close_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

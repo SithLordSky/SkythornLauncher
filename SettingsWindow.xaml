@@ -1,0 +1,202 @@
+<Window x:Class="SkythornLauncher.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:SkythornLauncher.Controls"
+        xmlns:local="clr-namespace:SkythornLauncher"
+        Title="Settings"
+        Width="{x:Static local:LayoutMetrics.WindowWidth}"
+        Height="{x:Static local:LayoutMetrics.WindowHeight}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        FontFamily="{DynamicResource FantasyFont}">
+    <Grid Width="{x:Static local:LayoutMetrics.WindowWidth}"
+          Height="{x:Static local:LayoutMetrics.WindowHeight}">
+        <Image Source="pack://siteoforigin:,,,/Assets/settings-background.png"
+               Stretch="Fill"
+               Width="{x:Static local:LayoutMetrics.WindowWidth}"
+               Height="{x:Static local:LayoutMetrics.WindowHeight}"
+               RenderOptions.BitmapScalingMode="HighQuality"/>
+
+        <Grid Margin="{x:Static local:SubWindowMetrics.ContentMargin}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled"
+                          Margin="0,0,0,52">
+                <StackPanel>
+                    <TextBlock Text="Updates" Style="{StaticResource SubWindowHeadingText}" Margin="0,0,0,8"/>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Current Version" Style="{StaticResource FantasyBodyText}" Margin="0,0,8,6"/>
+                        <TextBlock x:Name="UpdateCurrentVersionText"
+                                   Grid.Row="0" Grid.Column="1"
+                                   Style="{StaticResource FantasyBodyText}"
+                                   Margin="0,0,0,6"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Latest Version" Style="{StaticResource FantasyBodyText}" Margin="0,0,8,6"/>
+                        <TextBlock x:Name="UpdateLatestVersionText"
+                                   Grid.Row="1" Grid.Column="1"
+                                   Style="{StaticResource FantasyBodyText}"
+                                   Margin="0,0,0,6"
+                                   Text="—"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Status" Style="{StaticResource FantasyBodyText}" Margin="0,0,8,6"/>
+                        <TextBlock x:Name="UpdateStatusText"
+                                   Grid.Row="2" Grid.Column="1"
+                                   Style="{StaticResource FantasyBodyText}"
+                                   Margin="0,0,0,6"
+                                   TextWrapping="Wrap"/>
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Button x:Name="CheckForUpdatesButton"
+                                Content="Check for Updates"
+                                MinWidth="130"
+                                Height="28"
+                                Margin="0,0,8,0"
+                                Style="{StaticResource SubWindowSecondaryButton}"
+                                Click="CheckForUpdates_Click"/>
+                        <Button x:Name="InstallUpdateButton"
+                                Content="Install Update"
+                                MinWidth="130"
+                                Height="28"
+                                IsEnabled="False"
+                                Style="{StaticResource SubWindowSecondaryButton}"
+                                Click="InstallUpdate_Click"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Game Options" Style="{StaticResource SubWindowHeadingText}" Margin="0,0,0,8"/>
+
+                    <CheckBox x:Name="AutoReconnectBox"
+                              Style="{StaticResource SubWindowCheckBox}"
+                              Content="Auto reconnect"
+                              Margin="0,0,0,8"/>
+                    <CheckBox x:Name="PacketLogBox"
+                              Style="{StaticResource SubWindowCheckBox}"
+                              Content="Enable packet log"
+                              Margin="0,0,0,8"/>
+                    <CheckBox x:Name="MusicBox"
+                              Style="{StaticResource SubWindowCheckBox}"
+                              Content="Enable login music (in game)"
+                              Margin="0,0,0,8"/>
+                    <CheckBox x:Name="HighDpiBox"
+                              Style="{StaticResource SubWindowCheckBox}"
+                              Content="High DPI mode"
+                              Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Reconnect delay (ms)" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                    <TextBox x:Name="ReconnectDelayBox"
+                             Height="28"
+                             Margin="0,0,0,12"
+                             Style="{StaticResource SubWindowField}"/>
+
+                    <TextBlock Text="Footstep volume" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                    <Slider x:Name="FootstepsVolumeSlider"
+                            Minimum="0"
+                            Maximum="100"
+                            TickFrequency="5"
+                            IsSnapToTickEnabled="True"
+                            Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Backend graphics driver" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                    <ComboBox x:Name="DriverBox"
+                              Height="28"
+                              Margin="0,0,0,12"
+                              Style="{StaticResource SubWindowCombo}">
+                        <ComboBoxItem Content="Default" Tag="0"/>
+                        <ComboBoxItem Content="OpenGL" Tag="1"/>
+                        <ComboBoxItem Content="Vulkan" Tag="2"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Ultima Online game files path" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="GamePathBox"
+                                 Grid.Column="0"
+                                 Height="28"
+                                 Margin="0,0,8,0"
+                                 Style="{StaticResource SubWindowField}"/>
+                        <Button Grid.Column="1"
+                                Content="Browse"
+                                Width="80"
+                                Height="28"
+                                Style="{StaticResource SubWindowSecondaryButton}"
+                                Click="Browse_Click"/>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <Canvas Width="{x:Static local:LayoutMetrics.WindowWidth}"
+                Height="{x:Static local:LayoutMetrics.WindowHeight}">
+            <controls:MenuButton x:Name="CancelButton"
+                                 Canvas.Left="{x:Static local:SubWindowLayoutMetrics.CancelButtonLeft}"
+                                 Canvas.Top="{x:Static local:SubWindowLayoutMetrics.CancelButtonTop}"
+                                 Width="{x:Static local:SubWindowLayoutMetrics.CancelButtonWidth}"
+                                 Height="{x:Static local:SubWindowLayoutMetrics.CancelButtonHeight}"
+                                 NormalTopOffset="0"
+                                 NormalHeight="{x:Static local:SubWindowLayoutMetrics.CancelButtonHeight}"
+                                 HoverLeftOffset="{x:Static local:SubWindowLayoutMetrics.CancelHoverLeftOffset}"
+                                 HoverTopOffset="{x:Static local:SubWindowLayoutMetrics.CancelHoverTopOffset}"
+                                 HoverWidth="{x:Static local:SubWindowLayoutMetrics.CancelHoverWidth}"
+                                 HoverHeight="{x:Static local:SubWindowLayoutMetrics.CancelHoverHeight}"
+                                 NormalImageSource="pack://siteoforigin:,,,/Assets/Menu/Settings/cancel.png"
+                                 HoverImageSource="pack://siteoforigin:,,,/Assets/Menu/Settings/cancel-hover.png"
+                                 Panel.ZIndex="{x:Static local:SubWindowLayoutMetrics.SubWindowButtonArtZIndex}"
+                                 Click="Cancel_Click"/>
+            <controls:MenuButton x:Name="SaveButton"
+                                 Canvas.Left="{x:Static local:SubWindowLayoutMetrics.SaveButtonLeft}"
+                                 Canvas.Top="{x:Static local:SubWindowLayoutMetrics.SaveButtonTop}"
+                                 Width="{x:Static local:SubWindowLayoutMetrics.SaveButtonWidth}"
+                                 Height="{x:Static local:SubWindowLayoutMetrics.SaveButtonHeight}"
+                                 NormalTopOffset="0"
+                                 NormalHeight="{x:Static local:SubWindowLayoutMetrics.SaveButtonHeight}"
+                                 HoverLeftOffset="{x:Static local:SubWindowLayoutMetrics.SaveHoverLeftOffset}"
+                                 HoverTopOffset="{x:Static local:SubWindowLayoutMetrics.SaveHoverTopOffset}"
+                                 HoverWidth="{x:Static local:SubWindowLayoutMetrics.SaveHoverWidth}"
+                                 HoverHeight="{x:Static local:SubWindowLayoutMetrics.SaveHoverHeight}"
+                                 NormalImageSource="pack://siteoforigin:,,,/Assets/Menu/Settings/save.png"
+                                 HoverImageSource="pack://siteoforigin:,,,/Assets/Menu/Settings/save-hover.png"
+                                 Panel.ZIndex="{x:Static local:SubWindowLayoutMetrics.SubWindowButtonArtZIndex}"
+                                 Click="Save_Click"/>
+        </Canvas>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,6,8,0"
+                    Panel.ZIndex="20">
+            <Button Content="—"
+                    Width="26"
+                    Height="26"
+                    Margin="0,0,4,0"
+                    Background="#66000000"
+                    Foreground="#DDDDDD"
+                    BorderThickness="0"
+                    ToolTip="Minimize"
+                    Click="Minimize_Click"/>
+            <Button Content="✕"
+                    Width="26"
+                    Height="26"
+                    Background="#66000000"
+                    Foreground="#DDDDDD"
+                    BorderThickness="0"
+                    ToolTip="Close"
+                    Click="Close_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

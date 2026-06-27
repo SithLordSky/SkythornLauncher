@@ -1,0 +1,182 @@
+﻿<Window x:Class="SkythornLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:SkythornLauncher.Controls"
+        xmlns:local="clr-namespace:SkythornLauncher"
+        Title="Lord Skythorn's Revenge"
+        Width="800"
+        Height="600"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+    <Grid Width="800" Height="600">
+        <Image Source="pack://siteoforigin:,,,/Assets/home-background.png"
+               Stretch="Fill"
+               Width="800"
+               Height="600"
+               RenderOptions.BitmapScalingMode="HighQuality"/>
+
+        <Canvas Width="800" Height="600">
+            <controls:MenuButton x:Name="PlayButton"
+                                 Canvas.Left="{x:Static local:LayoutMetrics.PlayButtonLeft}"
+                                 Canvas.Top="{x:Static local:LayoutMetrics.PlayButtonTop}"
+                                 Width="{x:Static local:LayoutMetrics.PlayButtonWidth}"
+                                 Height="{x:Static local:LayoutMetrics.PlayButtonHeight}"
+                                 NormalTopOffset="{x:Static local:LayoutMetrics.PlayNormalTopOffset}"
+                                 NormalHeight="{x:Static local:LayoutMetrics.PlayNormalHeight}"
+                                 HoverTopOffset="{x:Static local:LayoutMetrics.PlayHoverTopOffset}"
+                                 HoverHeight="{x:Static local:LayoutMetrics.PlayHoverHeight}"
+                                 NormalImageSource="pack://siteoforigin:,,,/Assets/Menu/play.png"
+                                 HoverImageSource="pack://siteoforigin:,,,/Assets/Menu/play-hover.png"
+                                 Click="Play_Click"/>
+            <controls:MenuButton x:Name="ProfileButton"
+                                 Canvas.Left="{x:Static local:LayoutMetrics.ProfileButtonLeft}"
+                                 Canvas.Top="{x:Static local:LayoutMetrics.ProfileButtonTop}"
+                                 Width="{x:Static local:LayoutMetrics.ProfileButtonWidth}"
+                                 Height="{x:Static local:LayoutMetrics.ProfileButtonHeight}"
+                                 NormalTopOffset="{x:Static local:LayoutMetrics.ProfileNormalTopOffset}"
+                                 NormalHeight="{x:Static local:LayoutMetrics.ProfileNormalHeight}"
+                                 HoverTopOffset="{x:Static local:LayoutMetrics.ProfileHoverTopOffset}"
+                                 HoverHeight="{x:Static local:LayoutMetrics.ProfileHoverHeight}"
+                                 NormalImageSource="pack://siteoforigin:,,,/Assets/Menu/profile.png"
+                                 HoverImageSource="pack://siteoforigin:,,,/Assets/Menu/profile-hover.png"
+                                 Click="Profile_Click"/>
+            <controls:MenuButton x:Name="SettingsButton"
+                                 Canvas.Left="{x:Static local:LayoutMetrics.SettingsButtonLeft}"
+                                 Canvas.Top="{x:Static local:LayoutMetrics.SettingsButtonTop}"
+                                 Width="{x:Static local:LayoutMetrics.SettingsButtonWidth}"
+                                 Height="{x:Static local:LayoutMetrics.SettingsButtonHeight}"
+                                 NormalTopOffset="{x:Static local:LayoutMetrics.SettingsNormalTopOffset}"
+                                 NormalHeight="{x:Static local:LayoutMetrics.SettingsNormalHeight}"
+                                 HoverTopOffset="{x:Static local:LayoutMetrics.SettingsHoverTopOffset}"
+                                 HoverHeight="{x:Static local:LayoutMetrics.SettingsHoverHeight}"
+                                 NormalImageSource="pack://siteoforigin:,,,/Assets/Menu/settings.png"
+                                 HoverImageSource="pack://siteoforigin:,,,/Assets/Menu/settings-hover.png"
+                                 Click="Settings_Click"/>
+
+            <Image Source="pack://siteoforigin:,,,/Assets/Menu/menu-buttons-border.png"
+                   Canvas.Left="{x:Static local:LayoutMetrics.MenuButtonsBorderLeft}"
+                   Canvas.Top="{x:Static local:LayoutMetrics.MenuButtonsBorderTop}"
+                   Width="{x:Static local:LayoutMetrics.MenuButtonsBorderWidth}"
+                   Height="{x:Static local:LayoutMetrics.MenuButtonsBorderHeight}"
+                   Panel.ZIndex="{x:Static local:LayoutMetrics.MenuButtonsBorderZIndex}"
+                   Stretch="Fill"
+                   IsHitTestVisible="False"
+                   RenderOptions.BitmapScalingMode="HighQuality"/>
+
+            <Image x:Name="StatusOrb"
+                   Canvas.Left="392"
+                   Canvas.Top="152"
+                   Width="41"
+                   Height="42"
+                   Stretch="Uniform"
+                   Source="pack://siteoforigin:,,,/Assets/Icons/status-yellow.png"/>
+
+            <TextBlock x:Name="StatusValueText"
+                       Style="{StaticResource MainMenuProfilePanelValueText}"
+                       Canvas.Left="{x:Static local:LayoutMetrics.StatusValueLeft}"
+                       Canvas.Top="{x:Static local:LayoutMetrics.StatusValueTop}"
+                       Width="{x:Static local:LayoutMetrics.RedPanelValueWidth}"
+                       Text="Checking..."/>
+
+            <TextBlock x:Name="FolderPathValueText"
+                       Style="{StaticResource MainMenuProfilePanelValueText}"
+                       Canvas.Left="{x:Static local:LayoutMetrics.FolderPathValueLeft}"
+                       Canvas.Top="{x:Static local:LayoutMetrics.FolderPathValueTop}"
+                       Width="{x:Static local:LayoutMetrics.RedPanelValueWidth}"
+                       Text="Not set"/>
+
+            <TextBlock x:Name="ProfileValueText"
+                       Style="{StaticResource MainMenuProfilePanelValueText}"
+                       Canvas.Left="{x:Static local:LayoutMetrics.ProfileValueLeft}"
+                       Canvas.Top="{x:Static local:LayoutMetrics.ProfileValueTop}"
+                       Width="{x:Static local:LayoutMetrics.RedPanelValueWidth}"
+                       Text="Default"/>
+
+            <StackPanel x:Name="NewsPanel"
+                        Canvas.Left="{x:Static local:LayoutMetrics.NewsValueLeft}"
+                        Canvas.Top="{x:Static local:LayoutMetrics.NewsValueTop}"
+                        Width="{x:Static local:LayoutMetrics.NewsValueWidth}"/>
+
+            <TextBlock x:Name="ServerTimeValueText"
+                       Style="{StaticResource DynamicValueText}"
+                       Canvas.Left="{x:Static local:LayoutMetrics.ServerTimeValueLeft}"
+                       Canvas.Top="{x:Static local:LayoutMetrics.ServerTimeValueTop}"
+                       Width="{x:Static local:LayoutMetrics.StatsValueWidth}"
+                       Text="--:-- --"/>
+
+            <TextBlock x:Name="PlayersOnlineValueText"
+                       Style="{StaticResource DynamicValueText}"
+                       Canvas.Left="{x:Static local:LayoutMetrics.PlayersOnlineValueLeft}"
+                       Canvas.Top="{x:Static local:LayoutMetrics.PlayersOnlineValueTop}"
+                       Width="{x:Static local:LayoutMetrics.StatsValueWidth}"
+                       Text="—"/>
+
+            <TextBlock x:Name="ServerUptimeValueText"
+                       Style="{StaticResource DynamicValueText}"
+                       Canvas.Left="{x:Static local:LayoutMetrics.ServerUptimeValueLeft}"
+                       Canvas.Top="{x:Static local:LayoutMetrics.ServerUptimeValueTop}"
+                       Width="{x:Static local:LayoutMetrics.StatsValueWidth}"
+                       Text="—"/>
+
+            <TextBlock x:Name="LauncherVersionValueText"
+                       Style="{StaticResource DynamicValueText}"
+                       Canvas.Left="{x:Static local:LayoutMetrics.LauncherVersionValueLeft}"
+                       Canvas.Top="{x:Static local:LayoutMetrics.LauncherVersionValueTop}"
+                       Width="80"
+                       FontSize="{x:Static local:LayoutMetrics.LauncherVersionFontSize}"
+                       Text="{x:Static local:LauncherVersionInfo.Display}"/>
+
+            <TextBlock x:Name="ServerVersionValueText"
+                       Style="{StaticResource DynamicValueText}"
+                       Canvas.Left="{x:Static local:LayoutMetrics.ServerVersionValueLeft}"
+                       Canvas.Top="{x:Static local:LayoutMetrics.ServerVersionValueTop}"
+                       Width="80"
+                       FontSize="{x:Static local:LayoutMetrics.LauncherVersionFontSize}"
+                       Text="—"/>
+        </Canvas>
+
+        <TextBlock x:Name="UpdateNoticeText"
+                   Style="{StaticResource DynamicValueText}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="{x:Static local:LayoutMetrics.UpdateNoticeMargin}"
+                   FontSize="{x:Static local:LayoutMetrics.UpdateNoticeFontSize}"
+                   FontWeight="Bold"
+                   FontStyle="Italic"
+                   Foreground="#F7E8A8"
+                   TextAlignment="Center"
+                   TextWrapping="NoWrap"
+                   TextTrimming="None"
+                   Panel.ZIndex="10"
+                   Visibility="Collapsed"
+                   Cursor="Hand"
+                   Text="Update Available — Please go to Settings to update."
+                   MouseLeftButtonDown="UpdateNotice_Click"/>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,6,8,0">
+            <Button Content="—"
+                    Width="26"
+                    Height="26"
+                    Margin="0,0,4,0"
+                    Background="#66000000"
+                    Foreground="#DDDDDD"
+                    BorderThickness="0"
+                    ToolTip="Minimize"
+                    Click="Minimize_Click"/>
+            <Button Content="✕"
+                    Width="26"
+                    Height="26"
+                    Background="#66000000"
+                    Foreground="#DDDDDD"
+                    BorderThickness="0"
+                    ToolTip="Close"
+                    Click="Close_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

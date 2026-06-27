@@ -1,0 +1,27 @@
+# Publisher-owned paths included in update-manifest.json (relative to install root).
+# One path per line. Do not list user data (ClassicUO/settings.json, Client/Data/Profiles, etc.).
+SkythornLauncher.exe
+SkythornLauncher.dll
+SkythornUpdater.exe
+SkythornUpdater.dll
+SkythornUpdater.deps.json
+SkythornUpdater.runtimeconfig.json
+SkythornLauncher.deps.json
+SkythornLauncher.runtimeconfig.json
+Client/cuo.dll
+Client/cuo.deps.json
+Client/cuo.runtimeconfig.json
+Client/ClassicUO.Assets.dll
+Client/ClassicUO.IO.dll
+Client/ClassicUO.Renderer.dll
+Client/ClassicUO.Utility.dll
+Client/cuoapi.dll
+Client/FNA.dll
+Client/FNA.dll.config
+Client/FNA3D.dll
+Client/FAudio.dll
+Client/SDL3.dll
+Client/libtheorafile.dll
+Client/MP3Sharp.dll
+Client/SixLabors.ImageSharp.dll
+Client/zlib.dll

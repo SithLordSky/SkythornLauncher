@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>SkythornLauncher</AssemblyName>
+    <RootNamespace>SkythornLauncher</RootNamespace>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+    <Version>0.9.10</Version>
+    <AssemblyVersion>0.9.10.0</AssemblyVersion>
+    <FileVersion>0.9.10.0</FileVersion>
+    <InformationalVersion>0.9.10</InformationalVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System.IO" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="SkythornUpdater/**" />
+    <None Remove="SkythornUpdater/**" />
+    <EmbeddedResource Remove="SkythornUpdater/**" />
+    <Page Remove="SkythornUpdater/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\app.ico" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\home-background.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\profiles-background.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\settings-background.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\pointer.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\STRIcon.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Fonts\Harrington.ttf" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Icons\status-green.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Icons\status-red.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Icons\status-yellow.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\menu-buttons-border.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\play.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\play-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\profile.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\profile-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\settings.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\settings-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\new.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\new-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\delete.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\delete-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\cancel.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\cancel-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\save.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Profiles\save-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Settings\cancel.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Settings\cancel-hover.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Settings\save.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\Menu\Settings\save-hover.png" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
