@@ -8,7 +8,7 @@ internal static class LauncherVersionInfo
 {
     public const int Major = 0;
     public const int Minor = 9;
-    public const int Patch = 12;
+    public const int Patch = 13;
 
     public static string Display => $"{Major}.{Minor}.{Patch}";
 }
