@@ -39,7 +39,7 @@ public partial class SettingsWindow : Window
         MusicBox.IsChecked = prefs.EnableMusic;
         HighDpiBox.IsChecked = prefs.HighDpi;
         ReconnectDelayBox.Text = prefs.ReconnectDelayMs.ToString();
-        FootstepsVolumeSlider.Value = prefs.FootstepsVolume;
+        MusicVolumeSlider.Value = prefs.MusicVolume;
         GamePathBox.Text = _profile.UltimaOnlineDirectory;
 
         foreach (ComboBoxItem item in DriverBox.Items)
@@ -197,8 +197,8 @@ public partial class SettingsWindow : Window
                 EnablePacketLog = PacketLogBox.IsChecked == true,
                 EnableMusic = MusicBox.IsChecked == true,
                 HighDpi = HighDpiBox.IsChecked == true,
-                MusicVolume = _profile.Preferences.MusicVolume,
-                FootstepsVolume = (int)FootstepsVolumeSlider.Value,
+                MusicVolume = (int)MusicVolumeSlider.Value,
+                FootstepsVolume = _profile.Preferences.FootstepsVolume,
                 ForceDriver = driver
             }
         };

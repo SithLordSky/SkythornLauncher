@@ -31,6 +31,12 @@
                      SelectionChanged="ProfileList_SelectionChanged"/>
 
             <StackPanel Grid.Row="1" Margin="0,12,0,52">
+                <TextBlock Text="Profile Name" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                <TextBox x:Name="ProfileNameBox"
+                         Height="28"
+                         Margin="0,0,0,8"
+                         Style="{StaticResource SubWindowField}"/>
+
                 <TextBlock Text="Account Name" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
                 <TextBox x:Name="UsernameBox"
                          Height="28"

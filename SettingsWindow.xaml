@@ -101,8 +101,8 @@
                              Margin="0,0,0,12"
                              Style="{StaticResource SubWindowField}"/>
 
-                    <TextBlock Text="Footstep volume" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
-                    <Slider x:Name="FootstepsVolumeSlider"
+                    <TextBlock Text="Music Volume" Style="{StaticResource FantasyBodyText}" Margin="0,0,0,4"/>
+                    <Slider x:Name="MusicVolumeSlider"
                             Minimum="0"
                             Maximum="100"
                             TickFrequency="5"

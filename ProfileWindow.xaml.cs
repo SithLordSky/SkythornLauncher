@@ -74,6 +74,7 @@ public partial class ProfileWindow : Window
         }
 
         _selectedProfile = ResultState.Profiles[ProfileList.SelectedIndex];
+        ProfileNameBox.Text = _selectedProfile.Name;
         UsernameBox.Text = _selectedProfile.Username;
         PasswordBox.Password = _selectedProfile.HasSavedPassword
             ? SecretProtector.Unprotect(_selectedProfile.PasswordProtected)
@@ -126,6 +127,32 @@ public partial class ProfileWindow : Window
         if (ResultState == null || _selectedProfile == null)
         {
             return;
+        }
+
+        var newName = ProfileNameBox.Text.Trim();
+        if (string.IsNullOrWhiteSpace(newName))
+        {
+            MessageBox.Show(this, "Profile name cannot be empty.", "Profiles", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        var oldName = _selectedProfile.Name;
+        if (!string.Equals(oldName, newName, StringComparison.OrdinalIgnoreCase))
+        {
+            if (ResultState.Profiles.Any(p =>
+                    !ReferenceEquals(p, _selectedProfile) &&
+                    string.Equals(p.Name, newName, StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show(this, $"A profile named '{newName}' already exists.", "Profiles", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (string.Equals(ResultState.ActiveProfileName, oldName, StringComparison.OrdinalIgnoreCase))
+            {
+                ResultState.ActiveProfileName = newName;
+            }
+
+            _selectedProfile.Name = newName;
         }
 
         _selectedProfile.Username = UsernameBox.Text.Trim();

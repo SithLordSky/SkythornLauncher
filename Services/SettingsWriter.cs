@@ -36,8 +36,9 @@ internal static class SettingsWriter
         settings["reconnect"] = prefs.AutoReconnect;
         settings["reconnect_time"] = Math.Max(1000, prefs.ReconnectDelayMs);
         settings["login_music"] = prefs.EnableMusic;
-        settings["login_music_volume"] = Math.Clamp(prefs.MusicVolume, 0, 100);
-        settings["footsteps_volume"] = Math.Clamp(prefs.FootstepsVolume, 0, 100);
+        var musicVolume = Math.Clamp(prefs.MusicVolume, 0, 100);
+        settings["login_music_volume"] = musicVolume;
+        settings["music_volume"] = musicVolume;
         settings["force_driver"] = prefs.ForceDriver;
 
         if (!settings.ContainsKey("lang"))
@@ -87,6 +88,10 @@ internal static class SettingsWriter
         if (settings.TryGetValue("login_music_volume", out var volume) && TryReadInt(volume, out var vol))
         {
             prefs.MusicVolume = vol;
+        }
+        else if (settings.TryGetValue("music_volume", out var inGameVolume) && TryReadInt(inGameVolume, out var gameVol))
+        {
+            prefs.MusicVolume = gameVol;
         }
 
         if (settings.TryGetValue("footsteps_volume", out var footstepsVolume) && TryReadInt(footstepsVolume, out var footVol))

@@ -9,10 +9,10 @@
     <AssemblyName>SkythornLauncher</AssemblyName>
     <RootNamespace>SkythornLauncher</RootNamespace>
     <ApplicationIcon>Assets\app.ico</ApplicationIcon>
-    <Version>0.9.10</Version>
-    <AssemblyVersion>0.9.10.0</AssemblyVersion>
-    <FileVersion>0.9.10.0</FileVersion>
-    <InformationalVersion>0.9.10</InformationalVersion>
+    <Version>0.9.14</Version>
+    <AssemblyVersion>0.9.14.0</AssemblyVersion>
+    <FileVersion>0.9.14.0</FileVersion>
+    <InformationalVersion>0.9.14</InformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -252,6 +252,12 @@ internal static class GameLauncher
 
 
 
+        clientArgs.Add("-music_volume");
+
+        clientArgs.Add(Math.Clamp(prefs.MusicVolume, 0, 100).ToString());
+
+
+
         if (prefs.HighDpi)
 
         {
